@@ -1,0 +1,42 @@
+input.form-control{
+    margin-bottom : 5px  ;
+}
+
+body {
+    padding-top : 60px;
+    padding-bottom : 80px;
+}
+
+p.navbar-text.pull-right{
+    margin-right : 15px;
+}
+
+p.navbar-text.pull-left{
+    margin-left : 15px;
+}
+
+#profile-footer {
+    margin-right: 15px;
+}
+
+.black-color{
+    color: black;
+}
+
+.jga-widget-tool {
+    position: absolute;
+    right: 15px;
+    background-color: white;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    border-bottom-left-radius: 8px;
+    opacity: 0.7;
+}
+
+.profile-user{
+    float: none;
+}
+
+#widget-list-profile{
+    padding-right: 15px;
+}

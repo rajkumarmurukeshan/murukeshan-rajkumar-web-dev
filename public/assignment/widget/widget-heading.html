@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="initial-scale=1.25, user-scalable = no">
+    <title>Edit Widget</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel = "stylesheet" />
+    <link href="../css/style.css" rel="stylesheet" />
+</head>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="widget-list.html" class="navbar-link">
+                <span class="glyphicon glyphicon-chevron-left">
+                </span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="#">
+                Widget Edit
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="widget-list.html" class="navbar-link">
+                <span class="glyphicon glyphicon-ok">
+                </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+<body>
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <label for="widget-heading-name">Name</label>
+                <input type="text"
+                       class="form-control"
+                       id="widget-heading-name"
+                       placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="widget-heading-text">Text</label>
+                <input type="text"
+                       class="form-control"
+                       id="widget-heading-text"
+                       placeholder="Text">
+            </div>
+            <div class="form-group">
+                <label for="widget-heading-size">Size</label>
+                <input type="number"
+                       min="1"
+                       max="6"
+                       class="form-control"
+                       id="widget-heading-size"
+                       placeholder="Size">
+            </div>
+        </form>
+        <a class="btn btn-block btn-danger"
+           href="widget-list.html">Delete</a>
+    </div>
+</body>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class = "container">
+        <div class = "row navbar-text">
+            <div id ="profile-footer">
+                <a class = "pull-right" href="../user/profile.html">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+</html>
