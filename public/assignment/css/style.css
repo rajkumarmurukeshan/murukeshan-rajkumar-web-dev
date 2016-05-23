@@ -7,12 +7,16 @@ body {
     padding-bottom : 80px;
 }
 
-p.navbar-text.pull-right{
+/*p.navbar-text.pull-right{
     margin-right : 15px;
-}
+}*/
 
-p.navbar-text.pull-left{
+/*p.navbar-text.pull-left{
     margin-left : 15px;
+}*/
+
+#widget-list-eye-icon{
+    padding-left: 10px;
 }
 
 #profile-footer {
