@@ -24,7 +24,11 @@
         return api;
 
         function generateNextId(){
-            var newId = parseInt(users[users.length-1]._id)+1;
+            if(users.length === 0){
+                var newId = 123;
+            } else {
+                var newId = parseInt(users[users.length-1]._id) + 1;
+            }
             return newId.toString();
         }
 

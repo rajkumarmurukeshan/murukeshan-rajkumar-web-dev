@@ -25,7 +25,11 @@
         return api;
 
         function generateNextWebsiteId() {
-            var newId = parseInt(websites[websites.length-1]._id)+1;
+            if(websites.length === 0){
+                var newId = 123;
+            } else {
+                var newId = parseInt(websites[websites.length-1]._id) + 1;
+            }
             return newId.toString();
         }
 
