@@ -1,19 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="viewport" content="initial-scale=1.25, user-scalable = no">
-    <title>Widget-List</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel = "stylesheet" />
-    <link href="../css/style.css" rel="stylesheet" />
-</head>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-inner">
             <p class="navbar-text pull-left">
-                <a href="../views/page/page-list.view.client.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </p>
@@ -28,66 +17,38 @@
         </div>
     </div>
 </nav>
-<body>
-    <div class="container">
-        <div class="jga-widget">
-            <div class="jga-widget-tool">
-                <a href="widget-heading.view.client.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-                <span class="glyphicon glyphicon-align-justify"></span>
-            </div>
-            <h1>GIZMODO</h1>
+<div class="container">
+    <div ng-repeat="widget in model.widgets" class="jga-widget">
+        <div class="jga-widget-tool">
+            <a href="#">
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <span class="glyphicon glyphicon-align-justify"></span>
         </div>
-        <div class="jga-widget">
-            <div class="jga-widget-tool">
-                <a href="widget-heading.view.client.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-                <span class="glyphicon glyphicon-align-justify"></span>
+        <div ng-switch="widget.widgetType">
+            <div ng-switch-when="HEADER" ng-switch="widget.size">
+                <h1 ng-switch-when="1">{{widget.text}}</h1>
+                <h2 ng-switch-when="2">{{widget.text}}</h2>
+                <h3 ng-switch-when="3">{{widget.text}}</h3>
+                <h4 ng-switch-when="4">{{widget.text}}</h4>
+                <h5 ng-switch-when="5">{{widget.text}}</h5>
+                <h6 ng-switch-when="6">{{widget.text}}</h6>
             </div>
-            <h4>'Game Of Thrones' Season 6 Spoilers: Lannisters To Attack The Tyrells & The Sparrows At Once?</h4>
-        </div>
-        <div class="jga-widget">
-            <div class="jga-widget-tool">
-                <a href="widget-image.view.client.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-                <span class="glyphicon glyphicon-align-justify"></span>
+            <div ng-switch-when="HTML">
+                <div ng-bind-html="model.getSafeHtml(widget)"></div>
             </div>
-            <img width="100%" src="http://images.designntrend.com/data/images/full/89265/lena-headey-as-cersei-and-nikolaj-coster-waldau-as-jaime.jpg?w=780" />
-        </div>
-        <div class="jga-widget">
-            <div class="jga-widget-tool">
-                <a href="widget-heading.view.client.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-                <span class="glyphicon glyphicon-align-justify"></span>
+            <div ng-switch-when="IMAGE">
+                <img ng-src="{{widget.url}}" width="{{widget.width}}"/>
             </div>
-            <h4>Warning: Full “Game of Thrones” Season 6 spoilers ahead.</h4>
-        </div>
-        <div class="jga-widget">
-            <div class="jga-widget-tool">
-                <a href="widget-heading.view.client.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-                <span class="glyphicon glyphicon-align-justify"></span>
+            <div ng-switch-when="YOUTUBE">
+                <iframe width="{{widget.width}}" ng-src="{{model.getSafeUrl(widget)}}" frameborder="0" allowfullscreen></iframe>
             </div>
-            <p>
-                In the “Game of Thrones” Season 6, episode 5 preview, Sansa, Jon, Brienne and Podrick arrive at the Vale. There will be another reunion, but it won’t be a happy one as Sansa confronts Littlefinger on how much he knew about Ramsay before setting up the marriage. Littlefinger is a cunning strategist, so it was always curious to see him put someone as valuable as Sansa into the hands of a monster like Ramsay. The preview and photos reveal a very tense confrontation that could alter Littlefinger’s plan to become Warden of the North. The Vale’s army is also in play here as they head to war against Ramsay and the Boltons.
-            </p>
-        </div>
-        <div class="jga-widget">
-            <div class="jga-widget-tool">
-                <a href="widget-youtube.view.client.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-                <span class="glyphicon glyphicon-align-justify"></span>
+            <div ng-switch-default>
+                Unable to render widget
             </div>
-            <iframe width="100%" src="https://www.youtube.com/embed/mQ5QtQ59Nc8" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
-</body>
+</div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-inner">
@@ -102,7 +63,7 @@
                 </a>
             </p>
             <p class="navbar-text pull-right">
-                <a href="../views/user/profile.view.client.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
                     <span class="glyphicon glyphicon-user text-primary"></span>
                 </a>
             </p>
