@@ -5,7 +5,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="viewport" content="initial-scale=1.25, user-scalable = no">
-    <title>Edit Website</title>
+    <title>Edit Widget</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel = "stylesheet" />
     <link href="../css/style.css" rel="stylesheet" />
 </head>
@@ -13,15 +13,15 @@
     <div class="container-fluid">
         <div class="navbar-inner">
             <p class="navbar-text pull-left">
-                <a href="website-list.html" class="navbar-link">
+                <a href="widget-list.view.client.html" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </p>
             <a class="navbar-brand" href="#">
-                Edit Website
+                Widget Edit
             </a>
             <p class="navbar-text pull-right">
-                <a href="website-list.html" class="navbar-link">
+                <a href="widget-list.view.client.html" class="navbar-link">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>
@@ -32,38 +32,39 @@
     <div class="container">
         <form>
             <div class="form-group">
-                <label for="website-name">Website Name</label>
+                <label for="widget-heading-name">Name</label>
                 <input type="text"
                        class="form-control"
-                       id="website-name"
-                       value = "Blogging App"
-                       placeholder="Name" >
+                       id="widget-heading-name"
+                       placeholder="Name">
             </div>
             <div class="form-group">
-                <label for="website-description">Website Description</label>
-                <textarea type="text"
-                          rows="5"
-                          class="form-control"
-                          id="website-description"
-                          placeholder="Description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </textarea>
+                <label for="widget-heading-text">Text</label>
+                <input type="text"
+                       class="form-control"
+                       id="widget-heading-text"
+                       placeholder="Text">
+            </div>
+            <div class="form-group">
+                <label for="widget-heading-size">Size</label>
+                <input type="number"
+                       min="1"
+                       max="6"
+                       class="form-control"
+                       id="widget-heading-size"
+                       placeholder="Size">
             </div>
         </form>
         <a class="btn btn-block btn-danger"
-           href="website-list.html">Delete</a>
+           href="widget-list.view.client.html">Delete</a>
     </div>
 </body>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-inner">
-            <p class="navbar-text pull-left">
-                <a href="#" class="navbar-link">
-                    <span class="glyphicon glyphicon-share-alt"></span>
-                </a>
-            </p>
             <a class="navbar-brand" href="#"></a>
             <p class="navbar-text pull-right">
-                <a href="../user/profile.html" class="navbar-link">
+                <a href="../views/user/profile.view.client.html" class="navbar-link">
                     <span class="glyphicon glyphicon-user text-primary"></span>
                 </a>
             </p>
