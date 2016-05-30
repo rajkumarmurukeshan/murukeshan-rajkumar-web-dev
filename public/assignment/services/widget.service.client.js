@@ -17,11 +17,59 @@
 
     function WidgetService() {
         var api = {
-            findWidgetsForPageId: findWidgetsForPageId
+            findWidgetsByPageId: findWidgetsByPageId,
+            createWidget: createWidget,
+            findWidgetById: findWidgetById,
+            updateWidget: updateWidget,
+            deleteWidget: deleteWidget,
+            generateNextWidgetId: generateNextWidgetId
         };
         return api;
 
-        function findWidgetsForPageId(pageId) {
+        function generateNextWidgetId() {
+            if(widgets.length === 0){
+                var newId = 123;
+            } else {
+                var newId = parseInt(widgets[widgets.length-1]._id) + 1;
+            }
+            return newId.toString();
+        }
+        
+        function createWidget(pageId, widget) {
+            widgets.push(widget);
+            console.log(widgets);
+        }
+
+        function findWidgetById(widgetId) {
+            for(var i in widgets){
+                if(widgets[i]._id === widgetId){
+                    return widgets[i];
+                }
+            }
+            return null;
+        }
+
+        function updateWidget(widgetId, widget) {
+            for(var i in widgets){
+                if(widgets[i]._id === widgetId){
+                    widgets[i]= widget;
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        function deleteWidget(widgetId) {
+            for(var i in widgets){
+                if(widgets[i]._id === widgetId){
+                    widgets.splice(i,1);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function findWidgetsByPageId(pageId) {
             var resultSet = [];
             for(var i in widgets){
                 if(widgets[i].pageId === pageId+""){

@@ -6,11 +6,13 @@
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </p>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand"
+               href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                 Widgets
             </a>
             <p class="navbar-text pull-right">
-                <a href="widget-chooser.view.client.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new"
+                   class="navbar-link">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
             </p>
@@ -20,7 +22,7 @@
 <div class="container">
     <div ng-repeat="widget in model.widgets" class="jga-widget">
         <div class="jga-widget-tool">
-            <a href="#">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
             <span class="glyphicon glyphicon-align-justify"></span>
@@ -53,12 +55,12 @@
     <div class="container-fluid">
         <div class="navbar-inner">
             <p class="navbar-text pull-left">
-                <a href="#" class="navbar-link">
+                <a class="navbar-link">
                     <span class="glyphicon glyphicon-play black-color"></span>
                 </a>
             </p>
             <p class="navbar-text pull-left">
-                <a href="#" class="navbar-link">
+                <a class="navbar-link">
                     <span id="widget-list-eye-icon" class="glyphicon glyphicon-eye-open black-color"></span>
                 </a>
             </p>

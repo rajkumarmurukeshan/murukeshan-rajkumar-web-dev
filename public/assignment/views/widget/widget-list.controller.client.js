@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("WidgetListController", WidgetListController);
 
-    function WidgetListController($sce, $routeParams, WidgetService) {
+    function WidgetListController($sce, $routeParams, WidgetService, $location) {
         var vm = this;
         vm.userId = $routeParams.userId;
         vm.websiteId = $routeParams.websiteId;
@@ -12,7 +12,7 @@
         vm.getSafeUrl = getSafeUrl;
 
         function init() {
-            vm.widgets = WidgetService.findWidgetsForPageId(vm.pageId);
+            vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
         }
         init();
 
@@ -27,5 +27,7 @@
             return $sce.trustAsResourceUrl(url);
 
         }
+
+        
     }
 })();
