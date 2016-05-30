@@ -17,10 +17,13 @@
                 firstName: "",
                 lastName: ""
             }
-            if(password !== verifyPassword){
-                vm.error = "Password did not match"
+            console.log(username);
+            if(username == null || password == null || verifyPassword == null){
+                vm.error = "Username and Password cannot be blank";
             } else if (prevUser) {
-                vm.error = "Username already exists"
+                vm.error = "Username already exists";
+            } else if(password !== verifyPassword){
+                vm.error = "Password did not match";
             } else {
                 UserService.createUser(user);
                 $location.url("/user/"+newId);

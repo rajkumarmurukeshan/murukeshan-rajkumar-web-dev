@@ -27,6 +27,10 @@ body {
     color: black;
 }
 
+.errorAlert {
+    margin-top: 10px;
+}
+
 .jga-widget-tool {
     position: absolute;
     right: 15px;
