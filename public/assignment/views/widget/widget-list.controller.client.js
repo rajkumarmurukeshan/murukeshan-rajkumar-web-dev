@@ -16,6 +16,8 @@
                 .findWidgetsByPageId(vm.pageId)
                 .then(function (response) {
                     vm.widgets = response.data;
+                    $(".container")
+                        .sortable({axis: "y"});
                 });
         }
         init();
@@ -30,6 +32,6 @@
             var url = "https://www.youtube.com/embed/" + id;
             return $sce.trustAsResourceUrl(url);
         }
-        
+
     }
 })();
