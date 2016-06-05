@@ -66,7 +66,7 @@ module.exports = function (app) {
     };
 
     function findAllWebsitesForUser(req, res){
-        var userId = req.params.userId+"";
+        var userId = req.params.userId;
         var res_websites = [];
         for(var i in websites){
             if(websites[i].developerId === userId)
