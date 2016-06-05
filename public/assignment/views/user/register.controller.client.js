@@ -5,30 +5,39 @@
 
     function RegisterController($location, UserService) {
         var vm = this;
+        var newId = null;
+        UserService.generateNewUserId()
+            .then(function (response) {
+                newId = response.data;
+            });
 
         vm.register = function (username,password,verifyPassword) {
-            var newId = UserService.generateNextId();
-            console.log(newId);
-            var prevUser = UserService.findUserByUsername(username);
-            var user = {
-                _id: newId,
-                username: username,
-                password: password,
-                firstName: "",
-                lastName: ""
-            }
-            console.log(username);
-            if(username == null || password == null || verifyPassword == null){
+            if(username == null || password == null || verifyPassword == null ||
+                username == "" || password == "" || verifyPassword == ""){
                 vm.error = "Username and Password cannot be blank";
-            } else if (prevUser) {
-                vm.error = "Username already exists";
-            } else if(password !== verifyPassword){
+            } else if(password !== verifyPassword) {
                 vm.error = "Password did not match";
             } else {
-                UserService.createUser(user);
-                $location.url("/user/"+newId);
+                UserService.findUserByUsername(username)
+                    .then(function (response) {
+                        var prevUser = response.data;
+                        if(prevUser){
+                            vm.error = "Username already Exists";
+                        } else {
+                            var user = {
+                                _id: newId,
+                                username: username,
+                                password: password,
+                                firstName: "",
+                                lastName: ""
+                            };
+                            UserService.createUser(user)
+                                .then(function () {
+                                    $location.url("/user/"+newId);
+                                });
+                        }
+                    });
             }
         }
-
     }
 })();
