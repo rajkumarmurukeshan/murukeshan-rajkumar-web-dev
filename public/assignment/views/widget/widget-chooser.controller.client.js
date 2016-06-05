@@ -11,9 +11,19 @@
 
         vm.createWidget = createWidget;
 
+        function init() {
+            WidgetService
+                .generateNextWidgetId()
+                .then(function (response) {
+                    vm.nextWidgetId = response.data;
+                });
+        }
+
+        init();
+
         function createWidget(widgetType) {
             var widget = null;
-            var newId = WidgetService.generateNextWidgetId();
+            var newId = vm.nextWidgetId;
             switch(widgetType){
                 case 'HEADER':
                     widget= {
@@ -41,9 +51,11 @@
                     }
                     break;
             }
-            console.log(widget);
-            WidgetService.createWidget(vm.pageId,widget);
-            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+newId);
+            WidgetService
+                .createWidget(vm.pageId,widget)
+                .then(function () {
+                    $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+newId);
+                });
         }
     }
 })();
