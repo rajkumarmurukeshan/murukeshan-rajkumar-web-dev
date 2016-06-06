@@ -62,6 +62,8 @@
         <input  name="userId" value="{{model.userId}}" style="display: none"/>
         <button type="submit"   class="btn btn-block btn-primary">Upload Image</button>
     </form>
+    <a class="btn btn-primary btn-block"
+       href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}/flickr">Search Flickr</a>
     <a class="btn btn-block btn-danger"
        ng-click="model.deleteWidget()">Delete</a>
 
