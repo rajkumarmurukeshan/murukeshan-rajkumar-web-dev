@@ -8,7 +8,8 @@
         var id = $routeParams.id;
 
         function init() {
-            UserService.findUserById(id)
+            UserService
+                .findUserById(id)
                 .then(function (response) {
                    vm.user = response.data;
                 });
@@ -22,17 +23,18 @@
             UserService
                 .deleteUser(id)
                 .then(
-                    function(){
+                    function(response){
                         $location.url("/login");
                     },
-                    function() {
+                    function(error) {
                         vm.error = "Unable to remove user"
                     }
                 );
         }
 
         function updateUser(updatedUser) {
-            UserService.updateUser(id, updatedUser)
+            UserService
+                .updateUser(id, vm.user)
                 .then(
                 function(response) {
                     vm.success = "Updated successfully";

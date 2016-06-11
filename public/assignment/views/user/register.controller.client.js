@@ -5,11 +5,6 @@
 
     function RegisterController($location, UserService) {
         var vm = this;
-        var newId = null;
-        UserService.generateNewUserId()
-            .then(function (response) {
-                newId = response.data;
-            });
 
         vm.register = function (username,password,verifyPassword) {
             if(username == null || password == null || verifyPassword == null ||
@@ -25,15 +20,13 @@
                             vm.error = "Username already Exists";
                         } else {
                             var user = {
-                                _id: newId,
                                 username: username,
-                                password: password,
-                                firstName: "",
-                                lastName: ""
+                                password: password
                             };
                             UserService.createUser(user)
-                                .then(function () {
-                                    $location.url("/user/"+newId);
+                                .then(function (response) {
+                                    var usr = response.data;
+                                    $location.url("/user/"+usr._id);
                                 });
                         }
                     });
