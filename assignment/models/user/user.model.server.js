@@ -33,20 +33,11 @@ module.exports = function () {
     
     function updateUser(userId, user) {
         delete user._id;
-        console.log("DB Side");
-        console.log(user.phone);
         return User
-            .update({_id: userId},{
-                $set: {
-                    username: user.username,
-                    password: user.password,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    test: "23456",
-                    phone: user.phone,
-                    email: user.email
-                }
-            });
+            .update(
+                {_id: userId},
+                {$set: user}
+            );
     }
 
     function deleteUser(userId) {
