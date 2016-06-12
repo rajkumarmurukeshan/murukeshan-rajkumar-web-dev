@@ -17,7 +17,7 @@
         }
 
         init();
-        
+
         vm.updateWebsite = updateWebsite;
         vm.deleteWebsite = deleteWebsite;
 
@@ -30,11 +30,16 @@
         }
 
         function updateWebsite(websiteId,website) {
-            WebsiteService
-                .updateWebsite(websiteId,website)
-                .then(function () {
-                    $location.url("/user/"+ vm.userId + "/website");
-                });
+            vm.error = null;
+            if(website.name == null || website.name === ""){
+                vm.error = "Name cannot be blank !!";
+            }else {
+                WebsiteService
+                    .updateWebsite(websiteId,website)
+                    .then(function () {
+                        $location.url("/user/"+ vm.userId + "/website");
+                    });
+            }
         }
     }
 })();

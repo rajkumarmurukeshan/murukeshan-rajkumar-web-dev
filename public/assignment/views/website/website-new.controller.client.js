@@ -9,17 +9,22 @@
         vm.createWebsite = createWebsite;
 
         function createWebsite(name, description) {
-            var newWebsite = {
-                "_user": vm.userId,
-                "name": name,
-                "description": description
-            };
-            WebsiteService
-                .createWebsite(vm.userId,newWebsite)
-                .then(function (response) {
-                    console.log("This is client-controller");
-                    $location.url("/user/"+ vm.userId + "/website");
-                });
+            vm.error = null;
+            if(name == null || name === ""){
+                vm.error = "Name cannot be blank !!"
+            } else {
+                var newWebsite = {
+                    "_user": vm.userId,
+                    "name": name,
+                    "description": description
+                };
+                WebsiteService
+                    .createWebsite(vm.userId,newWebsite)
+                    .then(function (response) {
+                        console.log("This is client-controller");
+                        $location.url("/user/"+ vm.userId + "/website");
+                    });
+            }
         }
     }
 })();
