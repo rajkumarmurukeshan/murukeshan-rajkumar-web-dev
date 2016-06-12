@@ -21,11 +21,16 @@
         init();
 
         function updatePage(pageId,page) {
-            PageService
-                .updatePage(pageId,page)
-                .then(function () {
-                    $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
-                });
+            vm.error = null;
+            if(page.name == null || page.name === ""){
+                vm.error = "Name cannot be blank !!"
+            } else {
+                PageService
+                    .updatePage(pageId,page)
+                    .then(function () {
+                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+                    });
+            }
         }
 
         vm.deletePage = deletePage;
