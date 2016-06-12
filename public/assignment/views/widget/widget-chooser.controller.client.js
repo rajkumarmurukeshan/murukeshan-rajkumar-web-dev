@@ -40,8 +40,13 @@
                 case 'HTML':
                     widget= {
                         "type": "HTML",
-                        "_page": vm.pageId,
-                        "width": "100%"
+                        "_page": vm.pageId
+                    };
+                    break;
+                case 'INPUT':
+                    widget= {
+                        "type": "INPUT",
+                        "_page": vm.pageId
                     };
                     break;
             }
