@@ -11,7 +11,7 @@
             UserService
                 .findUserById(id)
                 .then(function (response) {
-                   vm.user = response.data;
+                    vm.user = response.data;
                 });
         }
         init();
@@ -33,16 +33,22 @@
         }
 
         function updateUser(updatedUser) {
-            UserService
-                .updateUser(id, vm.user)
-                .then(
-                function(response) {
-                    vm.success = "Updated successfully";
-                },
-                function(error) {
-                    vm.error = "Unable to update user"
-                }
-            );
+            vm.error = null;
+            vm.success = null;
+            if(updatedUser.username === "" || updatedUser.username == null){
+                vm.error = "Username cannot be blank!!";
+            } else {
+                UserService
+                    .updateUser(id, vm.user)
+                    .then(
+                        function (response) {
+                            vm.success = "Updated successfully";
+                        },
+                        function (error) {
+                            vm.error = "Unable to update user"
+                        }
+                    );
+            }
         }
 
         vm.profile = $location.url("/user/"+id);
