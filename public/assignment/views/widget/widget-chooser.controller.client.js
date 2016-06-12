@@ -37,6 +37,13 @@
                         "width": "100%"
                     };
                     break;
+                case 'HTML':
+                    widget= {
+                        "type": "HTML",
+                        "_page": vm.pageId,
+                        "width": "100%"
+                    };
+                    break;
             }
             WidgetService
                 .createWidget(vm.pageId,widget)
