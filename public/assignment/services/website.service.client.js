@@ -9,16 +9,10 @@
             findWebsitesByUser: findWebsitesByUser,
             findWebsiteById: findWebsiteById,
             updateWebsite: updateWebsite,
-            deleteWebsite: deleteWebsite,
-            generateNextWebsiteId: generateNextWebsiteId
+            deleteWebsite: deleteWebsite
         };
 
         return api;
-
-        function generateNextWebsiteId() {
-            var url = "/api/generateNextWebsiteId";
-            return $http.get(url);
-        }
 
         function deleteWebsite(websiteId) {
             var url = "/api/website/"+websiteId;

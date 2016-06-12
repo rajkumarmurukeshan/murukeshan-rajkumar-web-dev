@@ -8,25 +8,16 @@
         vm.userId = $routeParams.userId;
         vm.createWebsite = createWebsite;
 
-        function init() {
-            WebsiteService
-                .generateNextWebsiteId()
-                .then(function (response) {
-                    vm.nextWebsiteId = response.data;
-                });
-        }
-
-        init();
-
         function createWebsite(name, description) {
             var newWebsite = {
-                "_id": vm.nextWebsiteId,
+                "_user": vm.userId,
                 "name": name,
-                "developerId": vm.userId
+                "description": description
             };
             WebsiteService
                 .createWebsite(vm.userId,newWebsite)
                 .then(function (response) {
+                    console.log("This is client-controller");
                     $location.url("/user/"+ vm.userId + "/website");
                 });
         }

@@ -32,7 +32,7 @@ module.exports = function (app, models) {
                 function (stats) {
                     res.send(stats);
                 },
-                function () {
+                function (error) {
                     res.send(error);
                 }
             );
