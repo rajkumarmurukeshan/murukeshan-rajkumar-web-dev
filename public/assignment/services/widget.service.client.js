@@ -9,15 +9,10 @@
             createWidget: createWidget,
             findWidgetById: findWidgetById,
             updateWidget: updateWidget,
-            deleteWidget: deleteWidget,
-            generateNextWidgetId: generateNextWidgetId
+            deleteWidget: deleteWidget
         };
         return api;
 
-        function generateNextWidgetId() {
-            var url = "/api/generateNextWidgetId";
-            return $http.get(url);
-        }
         
         function createWidget(pageId, widget) {
             var url= "/api/page/"+pageId+"/widget";
