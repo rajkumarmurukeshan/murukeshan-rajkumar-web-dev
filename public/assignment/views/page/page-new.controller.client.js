@@ -7,24 +7,14 @@
         var vm = this;
         vm.userId = $routeParams.userId;
         vm.websiteId = $routeParams.websiteId;
-
-        function init() {
-            PageService
-                .generateNextPageId()
-                .then(function (response) {
-                    vm.nextPageId = response.data;
-                })
-        }
-
-        init();
         
         vm.createPage = createPage;
         
         function createPage(name,title) {
             var page = {
-                "_id": vm.nextPageId,
+                "_website": vm.websiteId,
                 "name": name,
-                "websiteId": vm.websiteId
+                "title": title
             };
             PageService
                 .createPage(vm.websiteId,page)

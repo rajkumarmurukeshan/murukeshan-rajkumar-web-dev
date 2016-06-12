@@ -67,12 +67,10 @@ module.exports = function (app, models) {
             .createWebsiteForUser(userId,newWebsite)
             .then(
                 function (website) {
-                    console.log("This is server");
-                    console.log(website);
                     res.send(website);
                 },
                 function (error) {
-                    res.statusCode(400).send(error);
+                    res.send(error);
                 }
             );
     }
