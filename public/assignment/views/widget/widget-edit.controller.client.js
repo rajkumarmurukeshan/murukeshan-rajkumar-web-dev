@@ -22,11 +22,16 @@
         vm.updateWidget = updateWidget;
 
         function updateWidget() {
-            WidgetService
-                .updateWidget(vm.widgetId,vm.widget)
-                .then(function () {
-                    $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
-                });
+            vm.error = null;
+            if(vm.widget.name == null || vm.widget.name == ""){
+                vm.error = "Name cannot be blank !!";
+            } else {
+                WidgetService
+                    .updateWidget(vm.widgetId,vm.widget)
+                    .then(function () {
+                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+                    });
+            }
         }
 
         vm.deleteWidget = deleteWidget;
