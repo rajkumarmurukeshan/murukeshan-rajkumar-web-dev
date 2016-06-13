@@ -10,17 +10,29 @@
         vm.pageId = $routeParams.pageId;
         vm.getSafeHtml = getSafeHtml;
         vm.getSafeUrl = getSafeUrl;
+        vm.reorderWidgets = reorderWidgets();
 
         function init() {
             WidgetService
                 .findWidgetsByPageId(vm.pageId)
                 .then(function (response) {
                     vm.widgets = response.data;
-                    $(".container")
-                        .sortable({axis: "y"});
+                    /*$(".container")
+                        .sortable({axis: "y"});*/
                 });
         }
         init();
+
+        function reorderWidgets(start,end) {
+            console.log("Inside client controller- reorderWidget");
+            console.log(start);
+            console.log(end);
+            WidgetService
+                .reorderWidgets(vm.pageId,start,end)
+                .then(function(response) {
+                    console.log(response);
+                });
+        }
 
         function getSafeHtml(widget) {
             return $sce.trustAsHtml(widget.text);

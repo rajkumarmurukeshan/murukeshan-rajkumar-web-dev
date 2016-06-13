@@ -10,24 +10,54 @@ module.exports = function () {
         findAllWidgetsForPage: findAllWidgetsForPage,
         findWidgetById: findWidgetById,
         updateWidget: updateWidget,
-        deleteWidget: deleteWidget
+        deleteWidget: deleteWidget,
+        reorderWidgets:reorderWidgets
     };
 
     return api;
 
+    function reorderWidgets(start,end,pageId)
+    {
+        console.log("Hiiiiiii");
+        console.log(start);
+        console.log(end);
+        return Widget.find(
+            function(err,widgets) {
+                widgets.forEach(function(widget) {
+                    if(start > end) {
+                        if(widget.widgetNumber < start && widget.widgetNumber >= end) {
+                            widget.widgetNumber++;
+                            widget.save(function(){});
+                        } else if(widget.widgetNumber===start) {
+                            widget.widgetNumber = end;
+                            widget.save(function(){});
+                        }
+                    } else {
+                        if(widget.widgetNumber>start && widget.widgetNumber<=end) {
+                            widget.widgetNumber--;
+                            widget.save(function(){});
+                        } else if(widget.widgetNumber===start) {
+                            widget.widgetNumber=end;
+                            widget.save(function(){});
+                        }
+                    }
+                });
+            });
+    }
+
     function createWidget(pageId, widget) {
         return Widget.create(widget);
     }
-    
+
     function findAllWidgetsForPage(pageId) {
         return Widget.find({"_page": pageId});
     }
-    
+
     function findWidgetById(widgetId) {
         return Widget.findById(widgetId);
     }
-    
-    
+
+
     function updateWidget(widgetId, widget) {
         delete widget._id;
         return Widget.update(
@@ -35,10 +65,10 @@ module.exports = function () {
             {$set: widget}
         );
     }
-    
+
     function deleteWidget(widgetId) {
         return Widget.remove({_id: widgetId});
     }
 
-    
+
 };

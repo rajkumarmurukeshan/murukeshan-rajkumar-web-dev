@@ -7,11 +7,27 @@ module.exports = function (app, models) {
     app.get("/api/widget/:widgetId", findWidgetById);
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
+    app.put("/api/page/:pageId/widget",reorderWidgets);
 
     var multer = require('multer');
     var upload = multer({ dest: __dirname+'/../../public/uploads' });
 
     app.post("/api/uploads", upload.single('myFile'), uploadImage);
+
+    function reorderWidgets(req,res)
+    {
+        var start = parseInt(req.query.start);
+        var end = parseInt(req.query.end);
+        var pageId = req.params.pageId;
+        widgetModel.reorderWidgets(start,end,pageId)
+            .then(
+                function(stats) {
+                    res.send(200);
+                },
+                function(error) {
+                    res.statusCode.send(404);
+                });
+    }
 
     function uploadImage(req, res) {
 
@@ -50,7 +66,7 @@ module.exports = function (app, models) {
                 }
             );
     }
-    
+
     function createWidget(req , res) {
         var pageId = req.params.pageId;
         var newWidget = req.body;
@@ -113,5 +129,5 @@ module.exports = function (app, models) {
                 }
             );
     }
-    
+
 };
