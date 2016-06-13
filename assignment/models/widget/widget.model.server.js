@@ -18,9 +18,6 @@ module.exports = function () {
 
     function reorderWidgets(start,end,pageId)
     {
-        console.log("Hiiiiiii");
-        console.log(start);
-        console.log(end);
         return Widget.find(
             function(err,widgets) {
                 widgets.forEach(function(widget) {

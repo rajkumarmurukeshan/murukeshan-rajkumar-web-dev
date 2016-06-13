@@ -10,7 +10,7 @@
         vm.pageId = $routeParams.pageId;
         vm.getSafeHtml = getSafeHtml;
         vm.getSafeUrl = getSafeUrl;
-        vm.reorderWidgets = reorderWidgets();
+        vm.reorderWidgets = reorderWidgets;
 
         function init() {
             WidgetService
@@ -24,13 +24,9 @@
         init();
 
         function reorderWidgets(start,end) {
-            console.log("Inside client controller- reorderWidget");
-            console.log(start);
-            console.log(end);
             WidgetService
                 .reorderWidgets(vm.pageId,start,end)
                 .then(function(response) {
-                    console.log(response);
                 });
         }
 

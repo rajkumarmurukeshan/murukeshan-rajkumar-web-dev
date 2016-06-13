@@ -17,10 +17,7 @@
                     },
                     stop:function(event,ui) {
                         endIndex=ui.item.index();
-                        console.log("Dai");
-                        console.log(startIndex);
-                        console.log(endIndex);
-                        scope.cb({start:startIndex,end:endIndex});
+                        scope.callback({start:startIndex,end:endIndex});
                     }
                 });
         }
@@ -28,7 +25,7 @@
             templateUrl: "views/widget/wam-sortable.view.client.html",
             scope: {
                 data: "=data",
-                cb: '&',
+                callback: '&',
                 model: "="
             },
             link:linker
