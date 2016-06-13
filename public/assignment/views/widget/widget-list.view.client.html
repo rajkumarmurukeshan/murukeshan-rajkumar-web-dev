@@ -43,7 +43,9 @@
                 <img ng-src="{{widget.url}}" width="{{widget.width}}"/>
             </div>
             <div ng-switch-when="YOUTUBE" class="youtube-widget">
-                <iframe width="{{widget.width}}" ng-src="{{model.getSafeUrl(widget)}}" frameborder="0" allowfullscreen></iframe>
+                <iframe width="{{widget.width}}"
+                        ng-src="{{model.getSafeUrl(widget)}}"
+                        frameborder="0" allowfullscreen></iframe>
             </div>
             <div ng-switch-when="INPUT">
                 <div ng-if="widget.formatted"
