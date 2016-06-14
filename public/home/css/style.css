@@ -1,9 +1,7 @@
 #home-header {
-    background-color: #3b5998;
-    height: 100px;
+    height: 110px;
     width: 100%;
     background: url("../images/BG1.jpg");
-    overflow-x: hidden;
 }
 
 .container {
@@ -14,12 +12,14 @@
 
 #logoArea {
     padding-top: 5px;
-    padding-left: 15px;
     width: 400px;
     height: 100px;
     color: white;
     float: left;
+    color: white;
+    text-decoration: none;
 }
+
 
 #nav {
     list-style: none;
@@ -42,4 +42,19 @@
 
 #nav li:hover {
     background-color:  gray;
+}
+
+#body {
+    padding-top: 120px;
+    width: inherit;
+    position: relative;
+    display: flex;
+}
+
+#home-bg {
+    background: url("../images/BG7.jpg");
+}
+
+#img {
+    padding-top: 20px;
 }
