@@ -1,0 +1,45 @@
+#home-header {
+    background-color: #3b5998;
+    height: 100px;
+    width: 100%;
+    background: url("../images/BG1.jpg");
+    overflow-x: hidden;
+}
+
+.container {
+    width: 960px;
+    height: auto;
+    margin: 0 auto;
+}
+
+#logoArea {
+    padding-top: 5px;
+    padding-left: 15px;
+    width: 400px;
+    height: 100px;
+    color: white;
+    float: left;
+}
+
+#nav {
+    list-style: none;
+    padding-top: 25px;
+    padding-left: 500px;
+}
+
+#nav a{
+    color: white;
+    text-decoration: none;
+}
+
+#nav li{
+    float: left;
+    margin-left: 35px;
+    padding: 10px;
+    border: 0.5px solid silver;
+    border-radius: 10px;
+}
+
+#nav li:hover {
+    background-color:  gray;
+}
