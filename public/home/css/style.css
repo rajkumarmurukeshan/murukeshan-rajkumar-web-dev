@@ -1,51 +1,5 @@
-#home-header {
-    height: 110px;
-    width: 100%;
-    background: url("../images/BG1.jpg");
-}
-
-.container {
-    width: 960px;
-    height: auto;
-    margin: 0 auto;
-}
-
-#logoArea {
-    padding-top: 5px;
-    width: 400px;
-    height: 100px;
-    color: white;
-    float: left;
-    color: white;
-    text-decoration: none;
-}
-
-
-#nav {
-    list-style: none;
-    padding-top: 25px;
-    padding-left: 500px;
-}
-
-#nav a{
-    color: white;
-    text-decoration: none;
-}
-
-#nav li{
-    float: left;
-    margin-left: 35px;
-    padding: 10px;
-    border: 0.5px solid silver;
-    border-radius: 10px;
-}
-
-#nav li:hover {
-    background-color:  gray;
-}
-
 #body {
-    padding-top: 120px;
+    padding-top: 100px;
     width: inherit;
     position: relative;
     display: flex;
@@ -55,6 +9,26 @@
     background: url("../images/BG7.jpg");
 }
 
-#img {
-    padding-top: 20px;
+#home-header {
+    height: 110px;
+    width: 100%;
+    background: url("../images/BG5.jpg");
+}
+
+.navbar-inverse {
+    width: 100%;
+    background: url("../images/BG5.jpg");
+
+}
+
+.navbar-brand {
+    padding-top: 0px;
+}
+
+.navbar-brand h3 {
+    margin-top: 10px;
+}
+
+.navbar-brand h4 {
+    margin-bottom: -9px;
 }
