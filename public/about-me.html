@@ -4,39 +4,50 @@
     <meta charset="UTF-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no">
+    <meta name="viewport" content="initial-scale=1.25, user-scalable = no">
     <title>Rajkumar Murukeshan</title>
     <link href = "home/css/style.css" rel= "stylesheet"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel = "stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+    <script src= "assignment/js/jquery.js"></script>
+    <script src= "assignment/js/jquery-ui.min.js"></script>
+    <link href="assignment/css/jquery-ui.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
 </head>
-<nav class="navbar navbar-fixed-top" id="home-header">
+<div class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
-        <div class="navbar-header" >
-            <a id="logoArea" href="index.html">
-                <h4>CS5610</h4>
-                <h3>Web Development Course Page</h3></a></div>
-        <div id="nav-area">
-            <ul id="nav">
-                <a href="#"> <li><h4>About-Me</h4></li></a>
-                <a href="../../project/index.html"> <li><h4>Project</h4></li></a>
-                <a href="../../assignment/index.html"> <li><h4>Assignment</h4></li></a>
-                <a href="https://github.com/rajkumarmurukeshan/murukeshan-rajkumar-web-dev"> <li><h4>Github</h4></li></a>
+        <a href="index.html" class="navbar-brand">
+            <h4 id="abt-me-header"><strong>CS5610</strong></h4>
+            <h3><strong>Web Development</strong></h3>
+        </a>
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse navHeaderCollapse">
+            <ul class="nav navbar-nav navbar-right" >
+                <li class="active"><a href="about-me.html"><h4>About-Me</h4></a></li>
+                <li><a href="project/index.html"> <h4>Project</h4></a></li>
+                <li><a href="assignment/index.html"> <h4>Assignment</h4></a></li>
+                <li><a href="https://github.com/rajkumarmurukeshan/murukeshan-rajkumar-web-dev"><h4>Github</h4></a></li>
             </ul>
         </div>
     </div>
-</nav>
+</div>
 <body id="home-bg">
 <div >
     <div id="body">
         <div class="container" class="row">
-            <div class="col-xs-12 col-md-8">
+            <div >
                 <h3> About Me</h3>
                 <p>
                     Hi, I am Rajkumar Murukeshan, currently pursuing my Master's degree in Computer Science.
                 </p>
             </div>
-            <div class="col-xs-12 col-md-4" id="img">
+            <div  id="img">
                 <img src="home/images/My-Image.jpg" height="300px" width="300px">
             </div>
         </div>

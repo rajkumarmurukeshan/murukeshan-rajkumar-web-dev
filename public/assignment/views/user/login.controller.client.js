@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("LoginController", LoginController)
 
-    function LoginController($location, UserService) {
+    function LoginController($location,$rootScope, UserService) {
         var vm = this;
 
         vm.login = function (username,password) {
@@ -13,14 +13,18 @@
                 vm.error = "Password cannot be blank !"
             } else {
                 UserService
-                    .findUserByCredentials(username,password)
+                    .login(username,password)
                     .then(function (response) {
                         var user = response.data;
                         if(user){
+                            $rootScope.currentUser = user;
                             $location.url("/user/"+user._id);
                         } else {
                             vm.error = "User not found";
                         }
+                    },
+                    function (error) {
+                        vm.error = "User not found !!"
                     });
             }
         }

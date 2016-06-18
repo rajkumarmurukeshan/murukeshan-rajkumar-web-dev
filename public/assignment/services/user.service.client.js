@@ -5,6 +5,10 @@
 
     function UserService($http) {
         var api = {
+            login: login,
+            logout: logout,
+            register: register,
+            loggedIn: loggedIn,
             findUserByCredentials: findUserByCredentials,
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
@@ -14,6 +18,30 @@
         };
 
         return api;
+        
+        function register(username,password) {
+            var user = {
+                username: username,
+                password: password
+            };
+            return $http.post("/api/register", user);
+        }
+
+        function loggedIn() {
+            return $http.get('/api/loggedIn');
+        }
+
+        function logout(user) {
+            return $http.post("/api/logout");
+        }
+        
+        function login(username,password) {
+            var user = {
+                username: username,
+                password: password
+            };
+            return $http.post("/api/login", user);
+        }
         
 
         function deleteUser(userId) {
