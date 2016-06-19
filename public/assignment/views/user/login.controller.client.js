@@ -17,8 +17,9 @@
                     .then(function (response) {
                         var user = response.data;
                         if(user){
-                            $rootScope.currentUser = user;
-                            $location.url("/user/"+user._id);
+                            console.log("LoginController");
+                            console.log(user);
+                            $location.url("/user");
                         } else {
                             vm.error = "User not found";
                         }

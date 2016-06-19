@@ -15,12 +15,20 @@
                 controller: "RegisterController",
                 controllerAs: "model"
             })
+            .when("/user", {
+                templateUrl: "views/user/profile.view.client.html",
+                controller: "ProfileController",
+                controllerAs: "model",
+                resolve :{
+                    loggedIn: checkLoggedIn
+                }
+            })
             .when("/user/:id", {
                 templateUrl: "views/user/profile.view.client.html",
                 controller: "ProfileController",
                 controllerAs: "model",
                 resolve :{
-                    loggedin: checkLoggedin
+                    loggedIn: checkLoggedIn
                 }
             })
             .when("/user/:userId/website", {
@@ -77,18 +85,22 @@
                 redirectTo: "/login"
             });
 
-        function checkLoggedin($q, $location, UserService) {
+        function checkLoggedIn($q, $location,$rootScope, UserService) {
             var deferred = $q.defer();
 
             UserService
                 .loggedIn()
                 .then(
                     function (response) {
+                        console.log("Check");
                         var user = response.data;
                         if(user == '0'){
+                            $rootScope.currentUser = null;
                             deferred.reject();
                             $location.url("/login");
                         } else {
+                            $rootScope.currentUser = user;
+                            console.log($rootScope.currentUser);
                             deferred.resolve();
                         }
                     },

@@ -4,13 +4,16 @@
         .controller("ProfileController", ProfileController)
 
     function ProfileController($routeParams, $rootScope, UserService, $location) {
+        
         var vm = this;
-        var id = $routeParams.id;
+        var id = $rootScope.currentUser._id;
 
         function init() {
             UserService
                 .findUserById(id)
                 .then(function (response) {
+                    console.log("ProfileController");
+                    console.log(response.data);
                     vm.user = response.data;
                 });
         }
@@ -25,8 +28,10 @@
                 .logout()
                 .then(
                     function(response) {
-                        $rootScope.currentUser = null;
-                        $location.url("/");
+                        $location.url("/login");
+                    },
+                    function() {
+                        $location.url("/login");
                     }
                 );
 
@@ -64,6 +69,6 @@
             }
         }
 
-        vm.profile = $location.url("/user/"+id);
+        /*vm.profile = $location.url("/user/"+id);*/
     }
 })();
