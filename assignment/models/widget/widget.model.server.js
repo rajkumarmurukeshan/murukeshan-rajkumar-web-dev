@@ -59,7 +59,25 @@ module.exports = function () {
         delete widget._id;
         return Widget.update(
             {_id: widgetId},
-            {$set: widget}
+            {$set: {
+                _page: widget._page,
+                type: widget.type,
+                name: widget.name,
+                text: widget.text,
+                placeholder: widget.placeholder,
+                description: widget.description,
+                url: widget.url,
+                width: widget.width,
+                height: widget.height,
+                rows: widget.rows,
+                size: widget.size,
+                class: widget.class,
+                icon: widget.icon,
+                deletable: widget.deletable,
+                formatted: widget.formatted,
+                dateCreated: widget.dateCreated,
+                widgetNumber:  widget.widgetNumber
+            }}
         );
     }
 
