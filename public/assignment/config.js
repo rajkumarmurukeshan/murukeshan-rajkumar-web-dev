@@ -84,7 +84,6 @@
             .otherwise({
                 redirectTo: "/login"
             });
-        
 
         function checkLoggedIn($q, $location,$rootScope, UserService) {
             var deferred = $q.defer();
