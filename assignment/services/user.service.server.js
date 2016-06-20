@@ -31,7 +31,6 @@ module.exports = function (app, models) {
             .findUserByUsername(username)
             .then(
                 function(user) {
-                    console.log(user);
                     if(user && bcrypt.compareSync(password, user.password))  {
                         done(null, user);
                     } else {
@@ -135,7 +134,6 @@ module.exports = function (app, models) {
             .then(
                 function(faceBookUser) {
                 if(faceBookUser) {
-                    console.log(faceBookUser);
                     done(null,faceBookUser);
                 } else{
                     faceBookUser={

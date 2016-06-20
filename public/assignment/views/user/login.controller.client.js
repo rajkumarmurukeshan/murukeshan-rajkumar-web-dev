@@ -17,8 +17,6 @@
                     .then(function (response) {
                         var user = response.data;
                         if(user){
-                            console.log("LoginController");
-                            console.log(user);
                             $location.url("/user");
                         } else {
                             vm.error = "User not found";

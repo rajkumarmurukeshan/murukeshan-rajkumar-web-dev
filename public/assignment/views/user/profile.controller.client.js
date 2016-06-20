@@ -12,8 +12,6 @@
             UserService
                 .findUserById(id)
                 .then(function (response) {
-                    console.log("ProfileController");
-                    console.log(response.data);
                     vm.user = response.data;
                 });
         }

@@ -1,5 +1,9 @@
 
 <div class="container">
+    <div ng-show= "model.error"
+         class="errorAlert alert alert-danger"
+         role="alert">{{model.error}}</div>
+
     <h1>Register</h1>
     <input ng-model="username"
            class = "form-control"
@@ -17,7 +21,4 @@
        class="btn btn-block btn-primary">Register</a>
     <a class="btn btn-block btn-danger"
        href="#/login">Cancel</a>
-    <div ng-show= "model.error"
-         class="errorAlert alert alert-danger"
-         role="alert">{{model.error}}</div>
 </div>

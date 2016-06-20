@@ -92,7 +92,6 @@
                 .loggedIn()
                 .then(
                     function (response) {
-                        console.log("Check");
                         var user = response.data;
                         if(user == '0'){
                             $rootScope.currentUser = null;
@@ -100,7 +99,6 @@
                             $location.url("/login");
                         } else {
                             $rootScope.currentUser = user;
-                            console.log($rootScope.currentUser);
                             deferred.resolve();
                         }
                     },
