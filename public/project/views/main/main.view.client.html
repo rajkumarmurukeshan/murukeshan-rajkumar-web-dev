@@ -1,0 +1,98 @@
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <a href="#" id="logo" class="navbar-brand">Xplore</a>
+        <button id="main-toggle" class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse navHeaderCollapse">
+            <ul class="nav navbar-nav navbar-right" >
+                <li><a href="#/login"><h4>Login</h4></a></li>
+                <li><a href="#"> <h4>Register</h4></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<script>
+    $('.carousel').carousel({
+        interval: 4000
+    });
+    $('.carousel-control.left').click(function() {
+        $('#myCarousel').carousel('prev');
+    });
+    $('.carousel-control.right').click(function() {
+        $('#myCarousel').carousel('next');
+    });
+</script>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to = "0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to = "1"></li>
+        <li data-target="#myCarousel" data-slide-to = "2"></li>
+        <li data-target="#myCarousel" data-slide-to = "3"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img id="Image1" src="images/Rio.jpg" alt="Image1">
+        </div>
+        <div class="item">
+            <img id="Image2" src="images/Paris2.jpg" alt="Image2">
+        </div>
+        <div class="item">
+            <img id="Image3" src="images/beach.jpg" alt="Image3">
+        </div>
+        <div class="item">
+            <img id="Image4" src="images/NYC.jpg" alt="Image4">
+        </div>
+    </div>
+</div>
+<div class="container pageBody">
+    <form>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="col-md-4">
+                    <input class="form-control"
+                           type="text"
+                           placeholder="I'm looking for.."
+                           ng-model="searchString" />
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control"
+                           type="text"
+                           placeholder="in city.."
+                           ng-model="searchLocation" />
+                </div>
+                <div class="col-md-4">
+                    <button type="submit"
+                            ng-click="model.searchPlaces(searchString,searchLocation)"
+                            class="btn btn-block btn-primary">Search</button>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </form>
+
+    <div id="searchResult">
+        <div ng-repeat = "item in model.out">
+            <div class="row">
+                <div class="col-xs-3 col-md-3">
+
+                </div>
+                <div class="col-xs-9 col-md-9">
+                    <div class="row">
+                        {{item.name}}
+                    </div>
+                    <div class="row">
+                        {{item.address}}
+                    </div>
+                    <div class="row">
+                        {{item.phone}}
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>

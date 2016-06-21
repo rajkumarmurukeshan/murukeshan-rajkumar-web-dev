@@ -1,3 +1,6 @@
+
+@import url(https://fonts.googleapis.com/css?family=Noto+Serif);
+
 #logo {
     font-size: 30px;
     height: 60px;
@@ -10,7 +13,8 @@
 
 .navbar-inverse {
     width: 100%;
-    background: url("../../home/images/BG5.jpg");
+    background: url("../images/BG5.jpg");
+    opacity: 0.9;
 }
 
 #home-body {
@@ -20,40 +24,43 @@
     background-size: cover;
 }
 
-#splash-image {
-    /*background-image: url("../media/images/pexels-photo-66997.jpeg");*/
-    /*background-image: url("../media/images/home-2.jpg");*/
-    /*background-size: cover;*/
-    /*background-position: center;*/
-    min-height: 60vh;
+.pageBody {
+    padding-top: 32px;
+    width: inherit;
+    position: relative;
+    align-content: stretch;
+    max-width: 100%;
+    padding-bottom: 35px;
 }
 
-#splash-image .slider {
-    height: 60vh;
+.form-control {
+    margin: 5px;
 }
 
-#splash-image .slider .slides li img {
-    background-position: bottom;
-    background-size: cover;
+.btn {
+    margin: 5px;
 }
 
-#inside-splash-container {
-    position: absolute;
-    top: 30%;
+#searchResult {
+    padding-top: 10px;
+}
+
+body {
+    /*background: url("../images/BWHP-background.jpg");*/
     width: 100%;
-    text-shadow: 0px 1px 1px grey, 1px 1px 3px grey;
+    height: 100%;
 }
 
-.splash-text {
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    padding-top: 8vh;
+.img-responsive {
+    background-size: cover;
+    width: 100%;
 }
 
-.splash-text h4 {
-    font-weight: 600;
+#myCarousel {
+    padding-top : 71px;
 }
 
-.splash-text h2 {
-    font-weight: 600;
-    text-transform: uppercase;
+#Image1, #Image2, #Image3, #Image4 {
+    height: 250px;
+    width: 100%;
 }

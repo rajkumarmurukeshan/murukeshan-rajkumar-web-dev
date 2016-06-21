@@ -5,8 +5,8 @@
     
     function Configuration($routeProvider) {
         $routeProvider
-            .when("/", {
-                templateUrl: "views/user/main.view.client.html",
+            .when("/main", {
+                templateUrl: "views/main/main.view.client.html",
                 controller: "MainController",
                 controllerAs: "model"
             })
@@ -14,6 +14,9 @@
                 templateUrl: "views/user/login.view.client.html",
                 controller: "LoginController",
                 controllerAs: "model"
+            })
+            .otherwise({
+                redirectTo: "/main"
             })
     }
 })();
