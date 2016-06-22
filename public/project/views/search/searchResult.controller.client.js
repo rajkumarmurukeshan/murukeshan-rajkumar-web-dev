@@ -40,6 +40,11 @@
                         vm.searchLocation = searchLocation;
                     }
                 )
+                .then(
+                    function () {
+                        vm.setFlag = true;
+                    }
+                )
         }
 
         function fetchItems(groups){
