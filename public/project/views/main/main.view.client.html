@@ -56,7 +56,15 @@
                     <input class="form-control"
                            type="text"
                            placeholder="I'm looking for.."
+                           list="searchList"
                            ng-model="searchString" />
+                    <datalist id="searchList">
+                        <option value="Shopping"></option>
+                        <option value="Coffee"></option>
+                        <option value="Baseball"></option>
+                        <option value="Nightlife"></option>
+                        <option value="Trending"></option>
+                    </datalist>
                 </div>
                 <div class="col-md-4">
                     <input class="form-control"
