@@ -1,6 +1,4 @@
 
-@import url(https://fonts.googleapis.com/css?family=Noto+Serif);
-
 #logo {
     font-size: 30px;
     height: 60px;
@@ -61,6 +59,26 @@ body {
 }
 
 #Image1, #Image2, #Image3, #Image4 {
-    height: 250px;
+    height: 400px;
     width: 100%;
 }
+
+#searchImage {
+    height: 270px;
+    width: 100%;
+}
+
+#searchResultPage {
+    padding-top: 90px;
+}
+
+.noDecoration{
+    text-decoration: none;
+    color: black;
+}
+
+#resultTag{
+    padding-bottom: 10px;
+    padding-left: 16px;
+}
+

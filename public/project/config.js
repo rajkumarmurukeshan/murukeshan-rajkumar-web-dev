@@ -15,6 +15,16 @@
                 controller: "LoginController",
                 controllerAs: "model"
             })
+            .when("/searchResult/:searchString/:searchLocation", {
+                templateUrl: "views/search/searchResult.view.client.html",
+                controller: "SearchResultController",
+                controllerAs: "model"
+            })
+            .when("/venue/:venueId", {
+                templateUrl: "views/venue/venue.view.client.html",
+                controller: "VenueController",
+                controllerAs: "model"
+            })
             .otherwise({
                 redirectTo: "/main"
             })
