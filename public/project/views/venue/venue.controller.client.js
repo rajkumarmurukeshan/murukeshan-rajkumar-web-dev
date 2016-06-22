@@ -18,7 +18,6 @@
                             for(var j in vm.venueDetails.photos.groups[i].items){
                                 var imageURL= vm.venueDetails.photos.groups[i].items[j].prefix+"original"+vm.venueDetails.photos.groups[i].items[j].suffix;
                                 imageURL = imageURL.replace(/\//gi,"/");
-                                console.log(imageURL);
                                 vm.photosURL.push(imageURL);
                             }
                         }
@@ -29,6 +28,20 @@
                         if(vm.venueDetails.bestPhoto != undefined){
                             vm.imgURL = vm.venueDetails.bestPhoto.prefix+"original"+vm.venueDetails.bestPhoto.suffix;
                             vm.imgURL = vm.imgURL.replace(/\//gi,"/");
+                        }
+                        vm.addrs = "";
+                        var addressArray = vm.venueDetails.location.formattedAddress;
+                        for (var a in addressArray) {
+                            vm.addrs = vm.addrs+addressArray[a]+", ";
+                        }
+                        vm.addrs= vm.addrs.replace(/, $/, "");
+                        vm.phone= "NA";
+                        if(vm.venueDetails.contact.formattedPhone != null || vm.venueDetails.contact.formattedPhone != undefined ){
+                            vm.phone = vm.venueDetails.contact.formattedPhone;
+                        }
+                        vm.rating = "NA";
+                        if(vm.venueDetails.rating != null || vm.venueDetails.rating != undefined ){
+                            vm.rating = vm.venueDetails.rating;
                         }
                         
                     }

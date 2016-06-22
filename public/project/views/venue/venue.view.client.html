@@ -25,14 +25,60 @@
         $('#myCarousel').carousel('next');
     });
 </script>
-<div id="searchResultPage" class="container pageBody">
+<script type="text/javascript">
+    <!--
+    function resettoggle() {
+        var e = document.getElementById('foo');
+        e.style.display = 'none';
+    }
+
+    function toggle_visibility(id) {
+        var e = document.getElementById(id);
+        if(e.style.display == 'none')
+            e.style.display = 'block';
+        else
+            e.style.display = 'none';
+    }
+    //-->
+</script>
+<div id="searchResultPage" class="container">
     <div class="row">
         <div class="col-xs-12 col-md-3">
             <image id="searchImage"  ng-src="{{model.imgURL}}"></image>
         </div>
-        <div class="col-xs-12 col-md-9">
-            <h2le>{{model.venueDetails.name}}</h2le>
+        <div class="col-xs-12 col-md-7 col-md-offset-1">
+            <h2>{{model.venueDetails.name}}</h2>
+            <h4>{{model.addrs}}</h4>
+            <h4>Phone No: {{model.phone}}</h4>
+            <h4>Rating: {{model.rating}}/10</h4>
         </div>
     </div>
+    <div id="tabs">
+        <ul class="nav nav-pills">
+            <li class="active"><a data-toggle="pill" data-target="#tips">Tips/Comments</a></li>
+            <li><a data-toggle="pill" data-target="#photos">Photos</a></li>
+        </ul>
 
+        <div class="tab-content">
+            <div id="tips" class="tab-pane fade in active">
+                <h3>Add Tips/Comment</h3>
+                <form>
+                    <textarea type="text"
+                              rows="3"
+                              class="form-control">
+                    </textarea>
+                    <button class="btn btn-primary pull-right">Done</button>
+                </form>
+            </div>
+            <div id="photos" class="tab-pane fade">
+                <div id="photosList" class="col-xs-12 col-sm-6 col-md-4" ng-repeat = "img in model.photosURL">
+                    <div class="thumbnail">
+                        <div class="embed-responsive embed-responsive-4by3">
+                            <image id="searchImage"  ng-src="{{img}}"></image>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
