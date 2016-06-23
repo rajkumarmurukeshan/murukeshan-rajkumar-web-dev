@@ -1,15 +1,15 @@
 (function () {
     angular
-        .module("WebAppMaker")
+        .module("Xplore")
         .controller("XploreProfileController", ProfileController)
 
-    function ProfileController($routeParams, $rootScope, UserService, $location) {
+    function ProfileController($routeParams, $rootScope, XploreUserService, $location) {
         
         var vm = this;
         var id = $rootScope.currentXploreUser._id;
 
         function init() {
-            UserService
+            XploreUserService
                 .findUserById(id)
                 .then(function (response) {
                     vm.user = response.data;
@@ -22,7 +22,7 @@
         vm.logout = logout;
 
         function logout() {
-            UserService
+            XploreUserService
                 .logout()
                 .then(
                     function(response) {
@@ -36,7 +36,7 @@
         }
 
         function unregisterUser() {
-            UserService
+            XploreUserService
                 .deleteUser(id)
                 .then(
                     function(response){
@@ -54,7 +54,7 @@
             if(updatedUser.username === "" || updatedUser.username == null){
                 vm.error = "Username cannot be blank!!";
             } else {
-                UserService
+                XploreUserService
                     .updateUser(id, vm.user)
                     .then(
                         function (response) {

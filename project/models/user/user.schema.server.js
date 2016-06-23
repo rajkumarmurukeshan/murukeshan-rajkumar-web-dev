@@ -19,6 +19,7 @@ module.exports = function () {
             token:String
         },
         phone: String,
+        dob: Date,
         dateCreated: {type: Date, default: Date.now()}
     }, {collection: "project.user"});
 

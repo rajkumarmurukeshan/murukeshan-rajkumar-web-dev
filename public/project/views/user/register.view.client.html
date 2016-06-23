@@ -1,3 +1,13 @@
+<script>
+    $(function() {
+        $( "#datepicker" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1950:2016',
+            minDate: new Date(1950, 10 - 1, 25),
+        });
+    });
+</script>
 <nav class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
         <a href="#" id="logo" class="navbar-brand">Xplore</a>
@@ -13,26 +23,108 @@
         </div>
     </div>
 </nav>
-<div class="container loginPageBody">
-    <div ng-show= "model.error"
-         class="errorAlert alert alert-danger"
-         role="alert">{{model.error}}</div>
-
-    <h1>Register</h1>
-    <input ng-model="username"
-           class = "form-control"
-           type = "text"
-           placeholder = "username"/>
-    <input class="form-control"
-           ng-model="password"
-           type = "password"
-           placeholder = "password"/>
-    <input ng-model="verifyPassword"
-           class="form-control"
-           type = "password"
-           placeholder = "verify password"/>
-    <a ng-click="model.register(username,password,verifyPassword)"
-       class="btn btn-block btn-primary">Register</a>
-    <a class="btn btn-block btn-danger"
-       href="#/login">Cancel</a>
+<div class="container RegisterPageBody">
+    <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Sign Up to Xplore</h2>
+                </div>
+                <div class="panel-body">
+                    <div ng-show= "model.error"
+                         class="errorAlert alert alert-danger"
+                         role="alert">{{model.error}}</div>
+                    <div ng-show= "registerForm.$invalid && registerForm.$submitted"
+                         class="errorAlert alert alert-danger"
+                         role="alert"><strong>Error!! </strong>One or more fields empty.</div>
+                    <form name="registerForm" novalidate>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input ng-model="firstName"
+                                           type="text"
+                                           required
+                                           name="firstName"
+                                           id="firstName"
+                                           class="form-control input-sm"
+                                           placeholder="*First Name">
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input ng-model="lastName"
+                                           type="text"
+                                           name="lastName"
+                                           id="lastName"
+                                           class="form-control input-sm"
+                                           required placeholder="*Last Name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input ng-model="username"
+                                   type="text"
+                                   name="username"
+                                   id="username"
+                                   class="form-control input-sm"
+                                   required placeholder="*Username">
+                        </div>
+                        <div class="form-group">
+                            <input ng-model="email"
+                                   type="email"
+                                   name="email"
+                                   id="email"
+                                   class="form-control input-sm"
+                                   required placeholder="*Email Address">
+                        </div>
+                        <div class="form-group">
+                            <select ng-model="gender"
+                                    type="text"
+                                    name="gender"
+                                    id="gender"
+                                    class="form-control input-sm"
+                                    required placeholder="*Gender">
+                                <option value="" default selected>Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input ng-model="dob"
+                                   class="form-control input-sm"
+                                   name="dob"
+                                   placeholder="*Date Of Birth"
+                                   id="datepicker"
+                                   required type="text"/>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input ng-model="password"
+                                           type="password"
+                                           name="password"
+                                           id="password"
+                                           class="form-control input-sm"
+                                           required placeholder="*Password">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input ng-model="passwordConfirmation"
+                                           type="password"
+                                           name="passwordConfirmation"
+                                           id="passwordConfirmation"
+                                           class="form-control input-sm"
+                                           required placeholder="*Confirm Password">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit"
+                                ng-click="model.register(firstName,lastName,username,email,gender,dob,password,passwordConfirmation)"
+                                class="btn btn-block btn-info">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

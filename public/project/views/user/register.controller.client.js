@@ -8,20 +8,26 @@
         
         vm.register = register;
         
-        function register(username,password,verifyPassword) {
-            if(username == null || password == null || verifyPassword == null ||
-                username == "" || password == "" || verifyPassword == ""){
-                vm.error = "Username and Password cannot be blank";
-            } else if(password !== verifyPassword) {
+        function register(firstName,lastName,username,email,gender,dob,password,passwordConfirmation) {
+            if(password !== passwordConfirmation) {
                 vm.error = "Password did not match";
             } else {
+                var user = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    username: username,
+                    email: email,
+                    gender: gender,
+                    dob: dob,
+                    password: password
+                }
                 XploreUserService
-                    .register(username,password)
+                    .register(user)
                     .then(
                         function (response) {
                             var user = response.data;
                             if(user) {
-                                $location.url("/user/"+user._id);
+                                $location.url("/user");
                             }
                         },
                         function (err) {

@@ -8,21 +8,21 @@ module.exports = function (app, models) {
 
     var userModelProject = models.userModelProject;
 
-    app.post("/api/user", createUser);
-    app.post("/api/login", passport.authenticate('xplore'), login);
-    app.post('/api/logout', logout);
-    app.post('/api/register', register);
-    app.get('/api/loggedIn', loggedIn);
-    app.get("/api/user", getUser);
-    app.get("/api/user/:userId", findUserById);
-    app.put("/api/user/:userId", updateUser);
-    app.delete("/api/user/:userId", deleteUser);
-    app.get ('/auth/facebook', passport.authenticate('facebook'));
+    app.post("/api/project/user", createUser);
+    app.post("/api/project/login", passport.authenticate('xplore'), xploreLogin);
+    app.post('/api/project/logout', logout);
+    app.post('/api/project/register', register);
+    app.get('/api/project/loggedIn', loggedIn);
+    app.get("/api/project/user", getUser);
+    app.get("/api/project/user/:userId", findUserById);
+    app.put("/api/project/user/:userId", updateUser);
+    app.delete("/api/project/user/:userId", deleteUser);
+    app.get ('/auth/project/facebook', passport.authenticate('facebook'));
     app.get("/auth/facebook/project/callback", passport.authenticate('facebook', {
         successRedirect: '/project/#/user',
         failureRedirect: '/project/#/login'
     }));
-    app.get("/auth/google", passport.authenticate('google', { scope: ['profile', 'email'] }));
+    app.get("/auth/project/google", passport.authenticate('google', { scope: ['profile', 'email'] }));
     app.get("/auth/google/project/callback",
         passport.authenticate('google', {
             successRedirect: '/project/#/user',
@@ -82,7 +82,7 @@ module.exports = function (app, models) {
         res.send(200);
     }
 
-    function login(req, res) {
+    function xploreLogin(req, res) {
         var user = req.user;
         res.json(user);
     }

@@ -94,3 +94,15 @@ body {
     padding-top: 80px;
 }
 
+.RegisterPageBody {
+    padding-top: 90px;
+}
+
+.ng-submitted input.ng-invalid {
+    border-color: red;
+}
+
+.ng-submitted select.ng-invalid {
+    border-color: red;
+}
+

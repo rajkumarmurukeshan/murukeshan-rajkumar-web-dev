@@ -42,7 +42,7 @@
                 redirectTo: "/main"
             })
 
-        function checkLoggedIn($q, $location,$rootScope, UserService) {
+        function checkLoggedIn($q, $location,$rootScope, XploreUserService) {
             var deferred = $q.defer();
 
             XploreUserService
