@@ -1,0 +1,38 @@
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <a href="#" id="logo" class="navbar-brand">Xplore</a>
+        <button id="main-toggle" class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse navHeaderCollapse">
+            <ul class="nav navbar-nav navbar-right" >
+                <li><a href="#"> <h4>Register</h4></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container loginPageBody">
+    <div ng-show= "model.error"
+         class="errorAlert alert alert-danger"
+         role="alert">{{model.error}}</div>
+
+    <h1>Register</h1>
+    <input ng-model="username"
+           class = "form-control"
+           type = "text"
+           placeholder = "username"/>
+    <input class="form-control"
+           ng-model="password"
+           type = "password"
+           placeholder = "password"/>
+    <input ng-model="verifyPassword"
+           class="form-control"
+           type = "password"
+           placeholder = "verify password"/>
+    <a ng-click="model.register(username,password,verifyPassword)"
+       class="btn btn-block btn-primary">Register</a>
+    <a class="btn btn-block btn-danger"
+       href="#/login">Cancel</a>
+</div>

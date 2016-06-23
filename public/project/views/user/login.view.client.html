@@ -8,26 +8,57 @@
         </button>
         <div class="collapse navbar-collapse navHeaderCollapse">
             <ul class="nav navbar-nav navbar-right" >
-                <li><a href="#"><h4>Login</h4></a></li>
                 <li><a href="#"> <h4>Register</h4></a></li>
             </ul>
         </div>
     </div>
 </nav>
-<div class="container">
+<div class="container loginPageBody">
     <h1>Login</h1>
-    <input ng-model="username"
-           class = "form-control"
-           type = "text"
-           placeholder = "username" />
-    <input ng-model="password"
-           class="form-control"
-           type = "password"
-           placeholder = "password" />
-    <a ng-click="model.login(username,password)"
-       class="btn btn-block btn-primary">Login</a>
+    <div ng-show= "model.error"
+         class="errorAlert alert alert-danger"
+         role="alert">{{model.error}}</div>
+
+    <form name="loginForm" novalidate>
+        <input ng-model="username"
+               required
+               name="username"
+               class = "form-control"
+               type = "text"
+               autocomplete="off"
+               autocapitalize="off"
+               placeholder = "username" />
+        <p ng-show="loginForm.username.$invalid && loginForm.$submitted">
+            Username is Required
+        </p>
+        <input ng-model="password"
+               name="password"
+               class="form-control"
+               required
+               type = "password"
+               placeholder = "password" />
+        <p ng-show="loginForm.password.$invalid && loginForm.$submitted">
+            Password is Required
+        </p>
+        <button type="submit"
+                ng-click="model.login(username,password)"
+                class="btn btn-block btn-primary">Login</button>
+    </form>
     <a ng-click="model.register()"
        class="btn btn-block btn-success">Register</a>
+    <div class = "row">
+        <div class="col-xs-12 col-md-3 col-md-offset-3">
+            <a href= "/auth/facebook" class="btn btn-primary btn-block">
+                <span class="fa fa-facebook-official"></span>
+                Facebook Login
+            </a>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <a href= "/auth/google" class="btn btn-danger btn-block">
+                <span class="fa fa-google-plus"></span>
+                Google Login
+            </a>
+        </div>
+    </div>
 </div>
-
 

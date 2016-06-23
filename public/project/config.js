@@ -12,8 +12,21 @@
             })
             .when("/login", {
                 templateUrl: "views/user/login.view.client.html",
-                controller: "LoginController",
+                controller: "XploreLoginController",
                 controllerAs: "model"
+            })
+            .when("/register", {
+                templateUrl: "views/user/register.view.client.html",
+                controller: "XploreRegisterController",
+                controllerAs: "model"
+            })
+            .when("/user", {
+                templateUrl: "views/user/profile.view.client.html",
+                controller: "XploreProfileController",
+                controllerAs: "model",
+                resolve :{
+                    loggedIn: checkLoggedIn
+                }
             })
             .when("/searchResult/:searchString/:searchLocation", {
                 templateUrl: "views/search/searchResult.view.client.html",
@@ -28,5 +41,30 @@
             .otherwise({
                 redirectTo: "/main"
             })
+
+        function checkLoggedIn($q, $location,$rootScope, UserService) {
+            var deferred = $q.defer();
+
+            XploreUserService
+                .loggedIn()
+                .then(
+                    function (response) {
+                        var user = response.data;
+                        if(user == '0'){
+                            $rootScope.currentXploreUser = null;
+                            deferred.reject();
+                            $location.url("/login");
+                        } else {
+                            $rootScope.currentXploreUser = user;
+                            deferred.resolve();
+                        }
+                    },
+                    function (error) {
+                        $location.url("/login");
+                    }
+                );
+
+            return deferred.promise;
+        };
     }
 })();
