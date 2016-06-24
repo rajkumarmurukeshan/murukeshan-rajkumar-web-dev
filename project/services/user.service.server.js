@@ -17,8 +17,8 @@ module.exports = function (app, models) {
     app.get("/api/project/user/:userId", findUserById);
     app.put("/api/project/user/:userId", updateUser);
     app.delete("/api/project/user/:userId", deleteUser);
-    app.get ('/auth/project/facebook', passport.authenticate('facebook'));
-    app.get("/auth/facebook/project/callback", passport.authenticate('facebook', {
+    app.get ('/auth/project/facebook', passport.authenticate('facebook1'));
+    app.get("/auth/facebook/project/callback", passport.authenticate('facebook1', {
         successRedirect: '/project/#/user',
         failureRedirect: '/project/#/login'
     }));
@@ -133,8 +133,8 @@ module.exports = function (app, models) {
     };
 
     passport.use('google', new GoogleStrategy(googleConfig, googleStrategy));
-    
-    
+
+
     function googleStrategy(token, refreshToken, profile, done) {
         userModelProject
             .findUserByGoogleId(profile.id)
@@ -166,33 +166,42 @@ module.exports = function (app, models) {
     var facebookConfig = {
         clientID     : process.env.FACEBOOK_CLIENT_ID,
         clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL  : process.env.FACEBOOK_CALLBACK_URL_PROJECT
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL_PROJECT,
+        profileFields: ['id', 'displayName', 'photos', 'name', 'email', 'gender']
     };
 
-    passport.use('facebook', new FacebookStrategy(facebookConfig, facebookStrategy));
+    passport.use('facebook1', new FacebookStrategy(facebookConfig, facebookStrategy));
 
     function facebookStrategy(token, refreshToken, profile, done) {
         userModelProject
             .findUserByFacebookId(profile.id)
             .then(
                 function(faceBookUser) {
-                if(faceBookUser) {
-                    done(null,faceBookUser);
-                } else{
-                    faceBookUser={
-                        username:profile.displayName.replace(/ /g,''),
-                        facebook:{
-                            token:token,
-                            displayName:profile.displayName,
-                            id:profile.id
-                        }
-                    };
-                    userModelProject.createUser(faceBookUser)
-                        .then(function(user){
-                            done(null,user);
-                        })
-                }
-            });
+                    if(faceBookUser) {
+                        done(null,faceBookUser);
+                    } else{
+                        var email = profile.emails[0].value;
+                        var emailParts = email.split("@");
+                        var gendr = profile.gender;
+                        gendr = gendr.replace(/^./, gendr[0].toUpperCase());
+                        faceBookUser={
+                            username:  emailParts[0],
+                            firstName: profile.name.givenName,
+                            lastName:  profile.name.familyName,
+                            gender: gendr,
+                            email:     email,
+                            facebook:{
+                                token:token,
+                                displayName:profile.displayName,
+                                id:profile.id
+                            }
+                        };
+                        userModelProject.createUser(faceBookUser)
+                            .then(function(user){
+                                done(null,user);
+                            })
+                    }
+                });
     }
 
 

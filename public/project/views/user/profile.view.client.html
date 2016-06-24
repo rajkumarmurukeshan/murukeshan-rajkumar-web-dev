@@ -8,8 +8,55 @@
         </button>
         <div class="collapse navbar-collapse navHeaderCollapse">
             <ul class="nav navbar-nav navbar-right" >
-                <li><a href="#"> <h4>Register</h4></a></li>
+                <li><a href="#/user/edit"> <h4>Edit Profile</h4></a></li>
+                <li><a ng-click="model.logout()"> <h4>Logout</h4></a></li>
+                <li><a ng-click="model.unregister()"> <h4>Delete Account</h4></a></li>
             </ul>
         </div>
     </div>
 </nav>
+<div id="searchResultPage" class="container">
+    <div class="row thumbnail">
+        <div class="col-xs-12 col-sm-3 col-md-3">
+            <img id="searchImage" ng-src="{{model.user.displayPicture}}"
+                    class="img-rounded">
+        </div>
+        <div class="col-xs-12 col-sm-8 col-sm-offset-1 col-md-8 col-md-offset-1">
+            <h2>{{model.user.firstName}} {{model.user.lastName}}</h2>
+            <p>
+                <i class="fa fa-envelope"></i> {{model.user.email}} <br>
+                <i class="fa fa-birthday-cake"></i> {{model.newDate}}
+            </p>
+        </div>
+    </div>
+    <div id="tabs">
+        <ul class="nav nav-pills nav-justified">
+            <li class="active"><a data-toggle="pill" data-target="#tips">Timeline</a></li>
+            <li><a data-toggle="pill" data-target="#photos">Xplored</a></li>
+            <li><a data-toggle="pill" data-target="#photos">To Be Xplored</a></li>
+            <li><a data-toggle="pill" data-target="#photos">Photos</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="tips" class="tab-pane fade in active">
+                <h3>Add Note</h3>
+                <form>
+                    <textarea type="text"
+                              rows="3"
+                              class="form-control">
+                    </textarea>
+                    <button class="btn btn-primary pull-right">Done</button>
+                </form>
+            </div>
+            <div id="photos" class="tab-pane fade">
+                <div id="photosList" class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <div class="embed-responsive embed-responsive-4by3">
+                            <image id="searchImage" ></image>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

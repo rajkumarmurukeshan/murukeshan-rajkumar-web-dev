@@ -13,6 +13,21 @@
                 .findUserById(id)
                 .then(function (response) {
                     vm.user = response.data;
+                    var monthNames = [
+                        "January", "February", "March",
+                        "April", "May", "June", "July",
+                        "August", "September", "October",
+                        "November", "December"
+                    ];
+                    if(vm.user.dob == null || vm.user.dob == undefined){
+                        vm.newDate = "Not Updated";
+                    } else {
+                        var date = vm.user.dob;
+                        var day = date.split('-')[2].split("T")[0];
+                        var monthIndex = parseInt(date.split('-')[1]);
+                        var year = date.split('-')[0];
+                        vm.newDate = monthNames[monthIndex - 1] + " " + day + " " + year;
+                    }
                 });
         }
         init();
@@ -26,10 +41,10 @@
                 .logout()
                 .then(
                     function(response) {
-                        $location.url("/login");
+                        $location.url("/main");
                     },
                     function() {
-                        $location.url("/login");
+                        $location.url("/main");
                     }
                 );
 
@@ -40,7 +55,7 @@
                 .deleteUser(id)
                 .then(
                     function(response){
-                        $location.url("/login");
+                        $location.url("/main");
                     },
                     function(error) {
                         vm.error = "Unable to remove user"
@@ -48,23 +63,18 @@
                 );
         }
 
-        function updateUser(updatedUser) {
-            vm.error = null;
-            vm.success = null;
-            if(updatedUser.username === "" || updatedUser.username == null){
-                vm.error = "Username cannot be blank!!";
-            } else {
-                XploreUserService
-                    .updateUser(id, vm.user)
-                    .then(
-                        function (response) {
-                            vm.success = "Updated successfully";
-                        },
-                        function (error) {
-                            vm.error = "Unable to update user"
-                        }
-                    );
-            }
+        function updateUser() {
+            XploreUserService
+                .updateUser(id, vm.user)
+                .then(
+                    function (response) {
+                        vm.success = "Updated successfully";
+                        $location.url("/user");
+                    },
+                    function (error) {
+                        vm.error = "Unable to update user"
+                    }
+                );
         }
 
         /*vm.profile = $location.url("/user/"+id);*/

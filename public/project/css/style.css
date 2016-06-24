@@ -106,3 +106,10 @@ body {
     border-color: red;
 }
 
+[ng-click],
+[data-ng-click],
+[x-ng-click],
+[data-target] {
+    cursor: pointer;
+}
+

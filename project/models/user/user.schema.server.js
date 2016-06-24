@@ -20,6 +20,7 @@ module.exports = function () {
         },
         phone: String,
         dob: Date,
+        displayPicture : {type: String, default: "images/defaultDisplayPic.jpg" },
         dateCreated: {type: Date, default: Date.now()}
     }, {collection: "project.user"});
 

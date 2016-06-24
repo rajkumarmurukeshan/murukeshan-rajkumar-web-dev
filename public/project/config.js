@@ -28,6 +28,14 @@
                     loggedIn: checkLoggedIn
                 }
             })
+            .when("/user/edit", {
+                templateUrl: "views/user/profile-edit.view.client.html",
+                controller: "XploreProfileController",
+                controllerAs: "model",
+                resolve :{
+                    loggedIn: checkLoggedIn
+                }
+            })
             .when("/searchResult/:searchString/:searchLocation", {
                 templateUrl: "views/search/searchResult.view.client.html",
                 controller: "SearchResultController",
