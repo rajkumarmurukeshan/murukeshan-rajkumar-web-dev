@@ -15,7 +15,8 @@ module.exports = function () {
     mongoose.createConnection(connectionString);
 
     var models = {
-        userModelProject: require("./user/user.model.server")()
+        userModelProject: require("./user/user.model.server")(),
+        venueModelProject: require("./venue/venue.model.server")()
     };
 
     return models;
