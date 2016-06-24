@@ -9,7 +9,7 @@
         vm.register = register;
         
         function register(firstName,lastName,username,email,gender,dob,password,passwordConfirmation) {
-            if(password !== passwordConfirmation) {
+            if(password !== passwordConfirmation || password === "" || password == undefined || password == null) {
                 vm.error = "Password did not match";
             } else {
                 var user = {

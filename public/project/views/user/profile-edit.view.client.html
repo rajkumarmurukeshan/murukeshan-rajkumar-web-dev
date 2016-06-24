@@ -19,7 +19,8 @@
         <div class="collapse navbar-collapse navHeaderCollapse">
             <ul class="nav navbar-nav navbar-right" >
                 <li><a href="#/user "> <h4>Home</h4></a></li>
-                <li><a href="#"> <h4>Logout</h4></a></li>
+                <li><a ng-click="model.logout()"> <h4>Logout</h4></a></li>
+                <li><a ng-click="model.unregister()"> <h4>Delete Account</h4></a></li>
             </ul>
         </div>
     </div>
@@ -28,7 +29,7 @@
     <h2>Edit Profile</h2>
     <div class="row">
         <div class="col-xs-12 col-sm-3 col-md-3">
-            <img id="searchImage" src="http://thetransformedmale.files.wordpress.com/2011/06/bruce-wayne-armani.jpg"  class="img-rounded">
+            <img id="searchImage" ng-src="{{model.user.displayPicture}}"  class="img-rounded">
         </div>
         <div class="col-xs-12 col-sm-8 col-sm-offset-1 col-md-8 col-md-offset-1">
             <form>

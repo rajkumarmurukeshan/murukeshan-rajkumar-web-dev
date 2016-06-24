@@ -8,6 +8,7 @@
         </button>
         <div class="collapse navbar-collapse navHeaderCollapse">
             <ul class="nav navbar-nav navbar-right" >
+                <li><a href="#/user"><h4>{{model.user.firstName}}</h4></a></li>
                 <li><a href="#/user/edit"> <h4>Edit Profile</h4></a></li>
                 <li><a ng-click="model.logout()"> <h4>Logout</h4></a></li>
                 <li><a ng-click="model.unregister()"> <h4>Delete Account</h4></a></li>

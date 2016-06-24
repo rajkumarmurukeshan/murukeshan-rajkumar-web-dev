@@ -42,9 +42,11 @@
                 .then(
                     function(response) {
                         $location.url("/main");
+                        $rootScope.currentXploreUser = null
                     },
                     function() {
                         $location.url("/main");
+                        $rootScope.currentXploreUser = null
                     }
                 );
 
@@ -56,9 +58,11 @@
                 .then(
                     function(response){
                         $location.url("/main");
+                        $rootScope.currentXploreUser = null
                     },
                     function(error) {
                         vm.error = "Unable to remove user"
+                        $rootScope.currentXploreUser = null
                     }
                 );
         }

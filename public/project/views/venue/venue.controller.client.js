@@ -3,7 +3,7 @@
         .module("Xplore")
         .controller("VenueController", VenueController);
     
-    function VenueController($location, FoursquareService, $routeParams) {
+    function VenueController($location, FoursquareService, $rootScope, XploreUserService, $routeParams) {
         var vm = this;
         vm.venueId = $routeParams.venueId;
         
@@ -50,6 +50,42 @@
         }
         
         init();
+
+        vm.user = $rootScope.currentXploreUser;
+
+        vm.unregister = unregisterUser;
+        vm.logout = logout;
+
+        function logout() {
+            XploreUserService
+                .logout()
+                .then(
+                    function(response) {
+                        $location.url("/main");
+                        $rootScope.currentXploreUser = null
+                    },
+                    function() {
+                        $location.url("/main");
+                        $rootScope.currentXploreUser = null
+                    }
+                );
+
+        }
+
+        function unregisterUser() {
+            XploreUserService
+                .deleteUser(id)
+                .then(
+                    function(response){
+                        $location.url("/main");
+                        $rootScope.currentXploreUser = null
+                    },
+                    function(error) {
+                        vm.error = "Unable to remove user"
+                        $rootScope.currentXploreUser = null
+                    }
+                );
+        }
 
 
     }
