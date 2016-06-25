@@ -3,8 +3,10 @@
         .module("Xplore")
         .controller("XploreLoginController", LoginController)
 
-    function LoginController($location,$rootScope, XploreUserService) {
+    function LoginController($location,$rootScope, $routeParams, XploreUserService) {
         var vm = this;
+        vm.venueId=$location.search().venueId;
+
 
         vm.login = function (username,password) {
             if(username === "" || username == null){
@@ -17,7 +19,11 @@
                     .then(function (response) {
                         var user = response.data;
                         if(user){
-                            $location.url("/user");
+                            if(vm.venueId){
+                                $location.url("/venue/"+vm.venueId);
+                            } else {
+                                $location.url("/user");
+                            }
                         } else {
                             vm.error = "User not found";
                         }

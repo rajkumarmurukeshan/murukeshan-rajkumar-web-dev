@@ -10,7 +10,7 @@ module.exports = function (app, models) {
     app.put("/api/project/venue/:venueId/deleteComment", deleteComment);
     app.put("/api/project/venue/:venueId/addFavorite", addFavoriteOf);
     app.put("/api/project/venue/:venueId/removeFavorite", removeFavoriteOf);
-    app.get("/api/project/venue/:venueId/:userId", isFavoriteOf);
+    app.get("/api/project/venue/:venueId/isFavoriteOf", isFavoriteOf);
 
     function isFavoriteOf(req, res) {
         var venueId =req.params.venueId;
@@ -75,14 +75,37 @@ module.exports = function (app, models) {
     function addComment(req, res) {
         var venueId =req.params.venueId;
         var comment = req.body;
+        var venue = {
+            venueId: venueId,
+            comments: [comment]
+        }
         venueModelProject
-            .addComment(venueId,comment)
+            .findVenueByVenueId(venueId)
             .then(
-                function (stats) {
-                    res.send(stats);
-                },
-                function (error) {
-                    res.send(error);
+                function (venueCheck) {
+                    if(venueCheck){
+                        venueModelProject
+                            .addComment(venueId,comment)
+                            .then(
+                                function (stats) {
+                                    res.send(stats);
+                                },
+                                function (error) {
+                                    res.send(error);
+                                }
+                            );
+                    } else {
+                        venueModelProject
+                            .createVenue(venue)
+                            .then(
+                                function (response) {
+                                    res.send(response);
+                                },
+                                function (error) {
+                                    res.send(error);
+                                }
+                            );
+                    }
                 }
             );
     }
@@ -104,7 +127,7 @@ module.exports = function (app, models) {
     function findVenueById(req, res) {
         var venueId = req.params.venueId;
         venueModelProject
-            .findVenueById(venueId)
+            .findVenueByVenueId(venueId)
             .then(
                 function (venue) {
                     res.json(venue);
@@ -120,13 +143,32 @@ module.exports = function (app, models) {
         var venueId =req.params.venueId;
         var venue = req.body;
         venueModelProject
-            .updateVenue(venueId, venue)
+            .findVenueByVenueId(venueId)
             .then(
-                function (stats) {
-                    res.send(stats);
-                },
-                function (error) {
-                    res.send(error);
+                function (venueCheck) {
+                    if(venueCheck){
+                        venueModelProject
+                            .updateVenue(venueId, venue)
+                            .then(
+                                function (stats) {
+                                    res.send(stats);
+                                },
+                                function (error) {
+                                    res.send(error);
+                                }
+                            );
+                    } else {
+                        venueModelProject
+                            .createVenue(venue)
+                            .then(
+                                function (response) {
+                                    res.send(response);
+                                },
+                                function (error) {
+                                    res.send(error);
+                                }
+                            );
+                    }
                 }
             );
     }

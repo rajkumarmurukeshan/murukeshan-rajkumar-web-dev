@@ -16,8 +16,6 @@ module.exports = function (app) {
             "&client_id="+clientID+"&client_secret="+clientSecret+"&v="+clientVersion+"&query="+searchString+"&venuePhotos=1"
         request(url, function (error, response, body) {
             if (!error && response.statusCode == 200){
-                console.log("hello from server side");
-                console.log(body);
                 return body;
             }
         });

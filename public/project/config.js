@@ -2,7 +2,7 @@
     angular
         .module("Xplore")
         .config(Configuration);
-    
+
     function Configuration($routeProvider) {
         $routeProvider
             .when("/main", {
@@ -10,7 +10,7 @@
                 controller: "MainController",
                 controllerAs: "model"
             })
-            .when("/login", {
+            .when("/login?:venueId", {
                 templateUrl: "views/user/login.view.client.html",
                 controller: "XploreLoginController",
                 controllerAs: "model"
@@ -39,16 +39,23 @@
             .when("/searchResult/:searchString/:searchLocation", {
                 templateUrl: "views/search/searchResult.view.client.html",
                 controller: "SearchResultController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve :{
+                    loggedIn: checkLogged
+                }
             })
             .when("/venue/:venueId", {
                 templateUrl: "views/venue/venue.view.client.html",
                 controller: "VenueController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve :{
+                    loggedIn: checkLogged
+                }
             })
             .otherwise({
                 redirectTo: "/main"
             })
+
 
         function checkLoggedIn($q, $location,$rootScope, XploreUserService) {
             var deferred = $q.defer();
@@ -73,6 +80,25 @@
                 );
 
             return deferred.promise;
+        };
+
+        function checkLogged($q, $location,$rootScope, XploreUserService) {
+
+            XploreUserService
+                .loggedIn()
+                .then(
+                    function (response) {
+                        var user = response.data;
+                        if(user == '0'){
+                            $rootScope.currentXploreUser = null;
+                        } else {
+                            $rootScope.currentXploreUser = user;
+                        }
+                    },
+                    function (error) {
+                    }
+                );
+            
         };
     }
 })();

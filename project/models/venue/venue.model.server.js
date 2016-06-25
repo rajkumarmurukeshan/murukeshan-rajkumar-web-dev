@@ -34,42 +34,42 @@ module.exports = function () {
         delete venue._id;
         return Venue
             .update(
-                {_id: venueId},
+                {venueId: venueId},
                 {$set: venue}
             );
     }
     
     function addComment(venueId, comment) {
         return Venue.update(
-            {_id: venueId},
+            {venueId: venueId},
             {$push: {comments: comment}}
         );
     }
     
     function deleteComment(venueId,comment) {
         return Venue.update(
-            {_id: venueId},
+            {venueId: venueId},
             {$pull: {comments: comment}}
         );
     }
 
     function addFavoriteOf(venueId, userId) {
         return Venue.update(
-            {_id: venueId},
+            {venueId: venueId},
             {$push: {favoriteOf: userId}}
         );
     }
 
     function removeFavoriteOf(venueId, userId) {
         return Venue.update(
-            {_id: venueId},
+            {venueId: venueId},
             {$pull: {favoriteOf: userId}}
         );        
     }
     
     function isFavoriteOf(venueId, userId) {
         return Venue.findOne({
-            _id: venueId,
+            venueId: venueId,
             favoriteOf: {
                 $elemMatch : {
                     $eq: userId

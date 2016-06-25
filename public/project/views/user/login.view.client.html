@@ -1,6 +1,6 @@
 <nav class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
-        <a href="#" id="logo" class="navbar-brand">Xplore</a>
+        <a href="#/main" id="logo" class="navbar-brand">Xplore</a>
         <button id="main-toggle" class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -14,50 +14,58 @@
     </div>
 </nav>
 <div class="container loginPageBody">
-    <h1>Login</h1>
-    <div ng-show= "model.error"
-         class="errorAlert alert alert-danger"
-         role="alert">{{model.error}}</div>
-
-    <form name="loginForm" novalidate>
-        <input ng-model="username"
-               required
-               name="username"
-               class = "form-control"
-               type = "text"
-               autocomplete="off"
-               autocapitalize="off"
-               placeholder = "username" />
-        <p ng-show="loginForm.username.$invalid && loginForm.$submitted">
-            Username is Required
-        </p>
-        <input ng-model="password"
-               name="password"
-               class="form-control"
-               required
-               type = "password"
-               placeholder = "password" />
-        <p ng-show="loginForm.password.$invalid && loginForm.$submitted">
-            Password is Required
-        </p>
-        <button type="submit"
-                ng-click="model.login(username,password)"
-                class="btn btn-block btn-primary">Login</button>
-    </form>
-    <a ng-click="model.register()"
-       class="btn btn-block btn-success">Register</a>
-    <div class = "row">
-        <div class="col-xs-12 col-md-3 col-md-offset-3">
-            <a href= "/auth/project/facebook" class="btn btn-primary btn-block">
-                <span class="fa fa-facebook-official"></span>
-                Facebook Login
-            </a>
-        </div>
-        <div class="col-xs-12 col-md-3">
-            <a href= "/auth/project/google" class="btn btn-danger btn-block">
-                <span class="fa fa-google-plus"></span>
-                Google Login
-            </a>
+    <div class="thumbnail col-xs-12 col-md-9 col-md-offset-1">
+        <div id="loginPageContent">
+            <h3>Time to <strong>Xplore!!</strong></h3>
+            <form id="logForm" name="loginForm" novalidate>
+                <input ng-model="username"
+                       required
+                       name="username"
+                       class = "form-control"
+                       type = "text"
+                       autocomplete="off"
+                       autocapitalize="off"
+                       placeholder = "username" />
+                <p ng-show="loginForm.username.$invalid && loginForm.$submitted">
+                    Username is Required
+                </p>
+                <input ng-model="password"
+                       name="password"
+                       class="form-control input-sm"
+                       required
+                       type = "password"
+                       placeholder = "password" />
+                <p ng-show="loginForm.password.$invalid && loginForm.$submitted">
+                    Password is Required
+                </p>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6 col-md-offset-3">
+                        <button type="submit"
+                                ng-click="model.login(username,password)"
+                                class="btn btn-block btn-primary">Login</button>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-xs-12 col-md-6 col-md-offset-3">
+                    <a ng-click="model.register()"
+                       class="btn btn-block btn-success">Register</a>
+                </div>
+            </div>
+            <div class = "row">
+                <div class="col-xs-12 col-md-3 col-md-offset-3">
+                    <a href= "/auth/project/facebook" class="btn btn-primary btn-block">
+                        <span class="fa fa-facebook-official"></span>
+                        Facebook Login
+                    </a>
+                </div>
+                <div class="col-xs-12 col-md-3">
+                    <a href= "/auth/project/google" class="btn btn-danger btn-block">
+                        <span class="fa fa-google-plus"></span>
+                        Google Login
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
