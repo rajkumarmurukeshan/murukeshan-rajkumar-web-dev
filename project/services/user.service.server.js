@@ -16,6 +16,8 @@ module.exports = function (app, models) {
     app.get("/api/project/user", getUser);
     app.get("/api/project/user/:userId", findUserById);
     app.put("/api/project/user/:userId", updateUser);
+    app.put("/api/project/addFavorite", addFavorite);
+    app.put("/api/project/removeFavorite", removeFavorite);
     app.delete("/api/project/user/:userId", deleteUser);
     app.get ('/auth/project/facebook', passport.authenticate('facebook1'));
     app.get("/auth/facebook/project/callback", passport.authenticate('facebook1', {
@@ -28,6 +30,37 @@ module.exports = function (app, models) {
             successRedirect: '/project/#/user',
             failureRedirect: '/project/#/login'
         }));
+    
+    function addFavorite(req, res) {
+        var userId = req.body.userId;
+        var venue = req.body.venue;
+        userModelProject
+            .addToFavorites(userId, venue)
+            .then(
+                function (stats) {
+                    res.send(stats);
+                },
+                function (error) {
+                    res.send(error);
+                }
+            );
+    }
+
+    function removeFavorite(req, res) {
+        var userId = req.body.userId;
+        var venueId = req.body.venueId;
+        userModelProject
+            .removeFromFavorites(userId, venueId)
+            .then(
+                function (stats) {
+                    res.send(stats);
+                },
+                function (error) {
+                    res.send(error);
+                }
+            );
+    }
+
 
     passport.use('xplore', new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);

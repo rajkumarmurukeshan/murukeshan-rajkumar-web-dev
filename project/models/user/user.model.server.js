@@ -13,9 +13,41 @@ module.exports = function () {
         findUserByFacebookId: findUserByFacebookId,
         findUserByGoogleId: findUserByGoogleId,
         updateUser: updateUser,
-        deleteUser: deleteUser
+        deleteUser: deleteUser,
+        addToFavorites: addToFavorites,
+        removeFromFavorites: removeFromFavorites,
+        addToBucketList: addToBucketList,
+        removeFromBucketList: removeFromBucketList
     };
     return api;
+
+    function addToBucketList(userId, venue) {
+        return ProjectUser.update(
+            {_id: userId},
+            {$push : {bucketList: venue}}
+        )
+    }
+
+    function removeFromBucketList(userId, venue) {
+        return ProjectUser.update(
+            {_id: userId},
+            {$pull : {bucketList: venue}}
+        )
+    }
+    
+    function addToFavorites(userId, venue) {
+        return ProjectUser.update(
+            {_id: userId},
+            {$push : {favorites: venue}}
+        )
+    }
+    
+    function removeFromFavorites(userId, venueId) {
+        return ProjectUser.update(
+            {_id: userId},
+            {$pull : {favorites: {venueId: venueId}}}
+        )
+    }
 
     function findUserByGoogleId(googleId) {
         return ProjectUser.findOne({"google.id": googleId});

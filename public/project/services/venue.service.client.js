@@ -18,15 +18,21 @@
         return api;
 
         function isFavoriteOf(venueId, userId) {
-            return $http.get("/api/project/venue/"+venueId+"/isFavoriteOf", userId);
+            return $http.get("/api/project/venue/"+venueId+"/isFavoriteOf/"+userId);
         }
 
         function removeFavoriteOf(venueId, userId) {
-            return $http.put("/api/project/venue/"+venueId+"/removeFavorite", userId)
+            var body = {
+                userId: userId
+            }
+            return $http.put("/api/project/venue/"+venueId+"/removeFavorite", body);
         }
 
         function addFavoriteOf(venueId, userId) {
-            return $http.put("/api/project/venue/"+venueId+"/addFavorite", userId)
+            var body = {
+                userId: userId
+            }
+            return $http.put("/api/project/venue/"+venueId+"/addFavorite", body);
         }
 
         function deleteComment(venueId, comment) {
@@ -38,7 +44,7 @@
         }
 
         function updateVenue(venueId, venue) {
-            return $http.put("/api/project/venue/"+venueId, venue)
+            return $http.put("/api/project/venue/"+venueId, venue);
         }
 
         function findVenueById(venueId) {

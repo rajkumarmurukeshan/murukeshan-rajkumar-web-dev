@@ -14,10 +14,28 @@
             findUserByUsername: findUserByUsername,
             createUser: createUser,
             updateUser: updateUser,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            addFavorite: addFavorite,
+            removeFavorite: removeFavorite
         };
 
         return api;
+
+        function addFavorite(userId,venue) {
+            var body = {
+                userId: userId,
+                venue: venue
+            };
+            return $http.put("/api/project/addFavorite", body);
+        }
+        
+        function removeFavorite(userId,venueId) {
+            var body = {
+                userId: userId,
+                venueId: venueId
+            };
+            return $http.put("/api/project/removeFavorite", body);
+        }
         
         function register(user) {
             return $http.post("/api/project/register", user);

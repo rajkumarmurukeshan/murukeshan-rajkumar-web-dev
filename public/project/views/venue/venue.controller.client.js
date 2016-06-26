@@ -34,9 +34,9 @@
                     function (response) {
                         vm.venueDetails = response.data.response.venue;
                         parseVenueDetails();
-                        //getUserDetails();
                     }
                 );
+            isFavorite();
         }
 
         function fetchUserDetails(cmt) {
@@ -61,29 +61,29 @@
 
         init();
 
-        vm.originalComments =
+        /*vm.originalComments =
 
-        function originalComments() {
-            var updatedComments =[];
-            for (var cmnt in vm.comments){
-                console.log(vm.comments[cmnt]);
-                var cmt = vm.comments[cmnt];
-                cmt.commentedUser =
-                    XploreUserService
-                        .findUserById(cmt.commentedBy)
-                        .then(
-                            function(response){
-                                console.log(response.data);
-                                return response.data;
-                            },
-                            function (error) {
-                                return null;
-                            }
-                        );
-                updatedComments.push(cmt);
-            }
-            vm.newComments= updatedComments;
-        }
+         function originalComments() {
+         var updatedComments =[];
+         for (var cmnt in vm.comments){
+         console.log(vm.comments[cmnt]);
+         var cmt = vm.comments[cmnt];
+         cmt.commentedUser =
+         XploreUserService
+         .findUserById(cmt.commentedBy)
+         .then(
+         function(response){
+         console.log(response.data);
+         return response.data;
+         },
+         function (error) {
+         return null;
+         }
+         );
+         updatedComments.push(cmt);
+         }
+         vm.newComments= updatedComments;
+         }*/
 
         function parseVenueDetails() {
             vm.photosURL=[];
@@ -118,18 +118,99 @@
             }
         }
 
-        /*function getUserDetails() {
-         XploreUserService
-         .findUserById(vm.userId)
-         .then(
-         function (user) {
-         vm.user = user;
-         },
-         function (error) {
-         vm.user = null;
-         }
-         );
-         }*/
+
+        function isFavorite() {
+            if($rootScope.currentXploreUser){
+                XploreVenueService
+                    .isFavoriteOf(vm.venueId, $rootScope.currentXploreUser._id)
+                    .then(
+                        function (response) {
+                            var venue = response.data;
+                            if(venue){
+                                vm.isFavorite = true;
+                            } else {
+                                vm.isNotFavorite = true;
+                            }
+                        },
+                        function (error) {
+                            vm.isNotFavorite = true;
+                        }
+                    )
+            } else {
+                vm.isNotFavorite = true;
+            }
+        }
+
+
+        vm.removeFavorite = removeFavorite;
+
+        function removeFavorite() {
+            XploreUserService
+                .removeFavorite($rootScope.currentXploreUser._id,vm.venueId)
+                .then(
+                    function (response) {
+                        return  XploreVenueService
+                                    .removeFavoriteOf(vm.venueId, $rootScope.currentXploreUser._id);
+                    },
+                    function (error) {
+                        vm.removeFavoriteStatus = false;
+                        $route.reload();
+                        $location.url("/venue/"+vm.venueId);
+                    }
+                )
+                .then(
+                    function (response) {
+                        vm.removeFavoriteStatus = true;
+                        $route.reload();
+                        $location.url("/venue/"+vm.venueId);
+                    },
+                    function (error) {
+                        vm.removeFavoriteStatus = false;
+                        $route.reload();
+                        $location.url("/venue/"+vm.venueId);
+                    }
+                );
+        }
+
+
+        vm.addFavorite = addFavorite;
+
+        function addFavorite() {
+            if($rootScope.currentXploreUser){
+                var venue = {
+                    venueId: vm.venueId,
+                    venueImage: vm.imgURL,
+                    venueName: vm.venueDetails.name,
+                };
+                XploreUserService
+                    .addFavorite($rootScope.currentXploreUser._id,venue)
+                    .then(
+                        function (response) {
+                            return  XploreVenueService
+                                .addFavoriteOf(vm.venueId, $rootScope.currentXploreUser._id);
+                        },
+                        function (error) {
+                            vm.addFavoriteStatus = false;
+                            $route.reload();
+                            $location.url("/venue/"+vm.venueId);
+                        }
+                    )
+                    .then(
+                        function (response) {
+                            vm.addFavoriteStatus = true;
+                            $route.reload();
+                            $location.url("/venue/"+vm.venueId);
+                        },
+                        function (error) {
+                            vm.addFavoriteStatus = false;
+                            $route.reload();
+                            $location.url("/venue/"+vm.venueId);
+                        }
+                    );
+            } else {
+                $location.url("/login?venueId="+vm.venueId);
+            }
+        }
 
         vm.addComment = addComment;
 

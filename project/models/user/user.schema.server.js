@@ -9,6 +9,11 @@ module.exports = function () {
         lastName: String,
         email: String,
         gender: String,
+        notes: {
+            value: String,
+            writtenBy: {type: mongoose.Schema.ObjectId, ref: "ProjectUser"},
+            createdOn: {type: Date, default: Date.now()}
+        },
         facebook:{
             id:String,
             token:String,
@@ -18,9 +23,21 @@ module.exports = function () {
             id:String,
             token:String
         },
+        favorites: [{
+            venueId: {type: mongoose.Schema.ObjectId, ref: "Venue"},
+            venueImage: String,
+            venueName: String
+        }],
+        bucketList: [{
+            venueId: {type: mongoose.Schema.ObjectId, ref: "Venue"},
+            venueImage: String,
+            venueName: String
+        }],
+        photos:[String],
         phone: String,
         dob: Date,
-        displayPicture : {type: String, default: "images/defaultDisplayPic.jpg" },
+        friends: [{type: mongoose.Schema.ObjectId, ref: "ProjectUser"}],
+        displayPicture: {type: String, default: "images/defaultDisplayPic.jpg"},
         dateCreated: {type: Date, default: Date.now()}
     }, {collection: "project.user"});
 

@@ -10,11 +10,11 @@ module.exports = function (app, models) {
     app.put("/api/project/venue/:venueId/deleteComment", deleteComment);
     app.put("/api/project/venue/:venueId/addFavorite", addFavoriteOf);
     app.put("/api/project/venue/:venueId/removeFavorite", removeFavoriteOf);
-    app.get("/api/project/venue/:venueId/isFavoriteOf", isFavoriteOf);
+    app.get("/api/project/venue/:venueId/isFavoriteOf/:userId", isFavoriteOf);
 
     function isFavoriteOf(req, res) {
         var venueId =req.params.venueId;
-        var userId = req.body;
+        var userId = req.params.userId;
         venueModelProject
             .isFavoriteOf(venueId,userId)
             .then(
@@ -29,22 +29,47 @@ module.exports = function (app, models) {
 
     function addFavoriteOf(req, res) {
         var venueId =req.params.venueId;
-        var userId = req.body;
+        var userId = req.body.userId;
+        var venue = {
+            venueId: venueId,
+            favoriteOf: [userId]
+        };
         venueModelProject
-            .addFavoriteOf(venueId,userId)
+            .findVenueByVenueId(venueId)
             .then(
-                function (stats) {
-                    res.send(stats);
-                },
-                function (error) {
-                    res.send(error);
+                function (venueCheck) {
+                    if(venueCheck){
+                        venueModelProject
+                            .addFavoriteOf(venueId,userId)
+                            .then(
+                                function (stats) {
+                                    res.send(stats);
+                                },
+                                function (error) {
+                                    res.send(error);
+                                }
+                            );
+                    } else {
+                        venueModelProject
+                            .createVenue(venue)
+                            .then(
+                                function (response) {
+                                    res.send(response);
+                                },
+                                function (error) {
+                                    res.send(error);
+                                }
+                            );
+                    }
                 }
             );
+
+
     }
 
     function removeFavoriteOf(req, res) {
         var venueId =req.params.venueId;
-        var userId = req.body;
+        var userId = req.body.userId;
         venueModelProject
             .removeFavoriteOf(venueId,userId)
             .then(

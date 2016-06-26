@@ -29,30 +29,46 @@
             </p>
         </div>
     </div>
-    <div id="tabs">
-        <ul class="nav nav-pills nav-justified">
-            <li class="active"><a data-toggle="pill" data-target="#tips">Timeline</a></li>
-            <li><a data-toggle="pill" data-target="#photos">Xplored</a></li>
-            <li><a data-toggle="pill" data-target="#photos">To Be Xplored</a></li>
-            <li><a data-toggle="pill" data-target="#photos">Photos</a></li>
-        </ul>
+    <div class="thumbnail" id="profileBodyThumbnail">
+        <div id="tabs">
+            <ul class="nav nav-pills nav-justified">
+                <li class="active"><a data-toggle="pill" data-target="#timeline">Timeline</a></li>
+                <li><a data-toggle="pill" data-target="#favorites">Favorites</a></li>
+                <li><a data-toggle="pill" data-target="#bucketlist">Bucket List</a></li>
+                <li><a data-toggle="pill" data-target="#photos">Photos</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="timeline" class="tab-pane fade in active">
+                    <div class="row">
+                        <h3>Add Note</h3>
+                    </div>
+                    <div class="row">
+                        <form>
+                            <textarea type="text"
+                                      rows="3"
+                                      name="note"
+                                      id="note"
+                                      ng-model="commentValue"
+                                      required class="form-control">
+                            </textarea>
+                            <button ng-click="model.addComment(commentValue)" class="btn btn-primary">Done</button>
+                        </form>
+                    </div>
+                </div>
+                <div id="favorites" class="tab-pane fade in active">
 
-        <div class="tab-content">
-            <div id="tips" class="tab-pane fade in active">
-                <h3>Add Note</h3>
-                <form>
-                    <textarea type="text"
-                              rows="3"
-                              class="form-control">
-                    </textarea>
-                    <button class="btn btn-primary pull-right">Done</button>
-                </form>
-            </div>
-            <div id="photos" class="tab-pane fade">
-                <div id="photosList" class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <div class="embed-responsive embed-responsive-4by3">
-                            <image id="searchImage" ></image>
+                </div>
+                <div id="bucketlist" class="tab-pane fade in active">
+
+                </div>
+                <div id="photos" class="tab-pane fade">
+                    <div class="row">
+                        <div id="photosList" class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="thumbnail">
+                                <div class="embed-responsive embed-responsive-4by3">
+                                    <image id="searchImage" ></image>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
