@@ -9,11 +9,11 @@ module.exports = function () {
         lastName: String,
         email: String,
         gender: String,
-        notes: {
+        notes: [{
             value: String,
             writtenBy: {type: mongoose.Schema.ObjectId, ref: "ProjectUser"},
             createdOn: {type: Date, default: Date.now()}
-        },
+        }],
         facebook:{
             id:String,
             token:String,

@@ -20,10 +20,28 @@
             addFriend: addFriend,
             removeFriend: removeFriend,
             addToFriendRequest: addToFriendRequest,
-            removeFromFriendRequest: removeFromFriendRequest
+            removeFromFriendRequest: removeFromFriendRequest,
+            addNote: addNote,
+            deleteNote: deleteNote
         };
 
         return api;
+        
+        function addNote(userId, note) {
+            var body ={
+                userId: userId,
+                note: note
+            };
+            return $http.put("/api/project/addNote", body);
+        }
+
+        function deleteNote(userId, note) {
+            var body ={
+                userId: userId,
+                note: note
+            };
+            return $http.put("/api/project/deleteNote", body);
+        }
         
         function addToFriendRequest(userId, friendId) {
             var body = {

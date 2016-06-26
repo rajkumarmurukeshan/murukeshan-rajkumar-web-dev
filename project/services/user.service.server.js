@@ -35,6 +35,38 @@ module.exports = function (app, models) {
     app.put("/api/project/removeFriend", removeFriend);
     app.put("/api/project/addToFriendRequest", addToFriendRequest);
     app.put("/api/project/removeFromFriendRequest", removeFromFriendRequest);
+    app.put("/api/project/addNote", addNote);
+    app.put("/api/project/deleteNote", deleteNote);
+    
+    function addNote(req, res) {
+        var userId= req.body.userId;
+        var note = req.body.note;
+        userModelProject
+            .addNote(userId, note)
+            .then(
+                function (stats) {
+                    res.send(stats);
+                },
+                function (error) {
+                    res.send(error);
+                }
+            );
+    }
+
+    function deleteNote(req, res) {
+        var userId= req.body.userId;
+        var note = req.body.note;
+        userModelProject
+            .deleteNote(userId, note)
+            .then(
+                function (stats) {
+                    res.send(stats);
+                },
+                function (error) {
+                    res.send(error);
+                }
+            );
+    }
 
 
     function addFriend(req, res) {

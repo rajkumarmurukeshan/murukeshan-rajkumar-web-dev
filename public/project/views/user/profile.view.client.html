@@ -22,7 +22,7 @@
             <div class="col-xs-12 col-sm-3 col-md-3">
                 <img id="venueImage" ng-src="{{model.user.displayPicture}}" class="img-rounded">
             </div>
-            <div class="col-xs-12 col-sm-8 col-sm-offset-1 col-md-8 col-md-offset-1">
+            <div id="profileDetails" class="col-xs-12 col-sm-8 col-sm-offset-1 col-md-8 col-md-offset-1">
                 <h2>{{model.user.firstName}} {{model.user.lastName}}</h2>
                 <p>
                     <i class="fa fa-envelope"></i> {{model.user.email}} <br>
@@ -38,149 +38,155 @@
                 <li><a data-toggle="pill" data-target="#favorites">Favorites ({{model.user.favorites.length}})</a></li>
                 <li><a data-toggle="pill" data-target="#friendsList">Friends ({{model.frnds.length}})</a></li>
                 <li><a data-toggle="pill" data-target="#friendRequests">Friend Requests ({{model.fRequests.length}})</a></li>
-                <li><a data-toggle="pill" data-target="#photos">Photos ({{model.user.photos.length}})</a></li>
             </ul>
             <div class="tab-content">
                 <div id="timeline" class="tab-pane fade in active">
-                    <div class="row">
-                        <h3>Add Note</h3>
-                    </div>
                     <div class="row">
                         <form>
                             <textarea type="text"
                                       rows="3"
                                       name="note"
                                       id="note"
-                                      ng-model="commentValue"
+                                      ng-model="noteValue"
+                                      placeholder="Whats' on your mind ???"
                                       required class="form-control">
                             </textarea>
-                            <button ng-click="model.addComment(commentValue)" class="btn btn-primary">Done</button>
+                            <button id="postSubmit" ng-click="model.addNote(noteValue)" class="btn btn-primary">Post</button>
                         </form>
                     </div>
-                    <div ng-hide="model.cmters.length === 0" id="usersCommentsHead" class="row">
-                        <strong><h3>User's Comments</h3></strong>
+                    <div ng-hide="model.nts.length == 0" id="usersCommentsHead" class="row">
+                        <strong><h3>Your Wall</h3></strong>
                     </div>
-                    <div ng-show="model.cmters.length === 0" class="row">
-                        <strong><h3>No User's Comments. Add the first Tip/Comment</h3></strong>
+                    <div ng-show="model.nts.length == 0" class="row">
+                        <strong><h3>No posts yet on your Wall. Add your first Post Now !!</h3></strong>
                     </div>
-                    <div id="commentsList" class="row" ng-repeat="comment in model.cmters | orderBy: '-commentedOn'">
+                    <div id="commentsList" class="row" ng-repeat="note in model.nts | orderBy: '-createdOn'">
                         <div class="col-xs-4 col-md-1">
-                            <image ng-click="#/user/friend/{{comment.commentedUser._id}}" id="commentImage"  ng-src="{{comment.commentedUser.displayPicture}}"></image>
+                            <image href="#/user/friend/{{note.writerDetails._id}}" id="commentImage"  ng-src="{{note.writerDetails.displayPicture}}"></image>
                         </div>
-                        <div class="frendListId" class="col-xs-8 col-md-11">
-                            <div class="frendListName" class="row">
-                                <a href="#/user/friend/{{comment.commentedUser._id}}">
-                                    <h4><strong>{{comment.commentedUser.firstName}}</strong></h4>
+                        <div class="col-xs-7 col-md-11">
+                            <div id="postedBy" class="row">
+                                <a href="#/user/friend/{{note.writerDetails._id}}">
+                                    <h4><strong>{{note.writerDetails.firstName}}</strong></h4>
                                 </a>
                             </div>
                             <div class="row">
                                 <div id="commentValueID" class="col-xs-7 col-md-9">
-                                    {{comment.value}}
+                                    {{note.value}}
                                 </div>
-                                <div ng-show="comment.commentedUser._id === currentXploreUser._id" class="col-xs-1 col-md-1">
-                                    <button id="deleteButton" ng-click="model.deleteComment(comment)" class="btn btn-primary pull-right">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="favorites" class="tab-pane fade">
-                        <div>
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
-                                        <div class="col-md-4">
-                                            <input ng-model="searchString"
-                                                   class="form-control"
-                                                   type="text"
-                                                   placeholder="I'm looking for.."/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <input ng-model="searchLocation"
-                                                   class="form-control"
-                                                   type="text"
-                                                   placeholder="in city or zip-code.." />
-                                        </div>
-                                        <div class="col-md-4">
-                                            <button type="submit"
-                                                    ng-click="model.searchPlaces(searchString,searchLocation)"
-                                                    class="btn btn-block btn-success">Search</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="row">
-                            <div class="favoritesCount" ng-show="model.user.favorites.length === 0">
-                                <strong><h3>
-                                    You haven't added any favorite location. Search locations to add it to your Favorites List.
-                                </h3></strong>
-                            </div>
-                            <div class="favoritesCount" ng-show="model.user.favorites.length == 1">
-                                <strong><h3>
-                                    You have marked 1 location as Favorite.
-                                </h3></strong>
-                            </div>
-                            <div class="favoritesCount" ng-show="model.user.favorites.length > 1">
-                                <strong><h3>
-                                    You have marked {{model.user.favorites.length}} locations as Favorite.
-                                </h3></strong>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat = "item in model.user.favorites">
-                                <div class="thumbnail">
-                                    <div class="embed-responsive embed-responsive-4by3">
-                                        <a href="#/venue/{{item.venueId}}">
-                                            <image id="searchImage"  ng-src="{{item.venueImage}}"></image>
-                                        </a>
-                                    </div>
-                                    <div class="caption">
-                                        <a class="noDecoration" href="#/venue/{{item.venueId}}">
-                                            <h4>{{item.venueName | limitTo:33}}</h4>
-                                        </a>
-                                    </div>
+                                <div class="col-xs-1 col-md-1">
+                                    <button id="deleteButton" ng-click="model.deleteNote(note)" class="btn btn-primary pull-right">Delete</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="friendsList" class="tab-pane fade">
-                        <div class="row">
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="col-md-4">
-                                            <input ng-model="friendName"
-                                                   class="form-control"
-                                                   name="friendName"
-                                                   type="text"
-                                                   required
-                                                   placeholder="Friend's username">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <button type="submit"
-                                                    ng-click="model.findFriend(friendName)"
-                                                    class="btn btn-block btn-success">Find friend</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div ng-show="model.friendSearch">
+                </div>
+                <div id="favorites" class="tab-pane fade">
+                    <div>
+                        <form>
                             <div class="row">
-                                <a href="#/user/friend/{{model.friendSearch._id}}">
-                                    <div class="col-xs-4 col-md-1">
-                                        <image id="commentImage"  ng-src="{{model.friendSearch.displayPicture}}"></image>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                    <div class="col-md-4">
+                                        <input ng-model="searchString"
+                                               class="form-control"
+                                               type="text"
+                                               placeholder="I'm looking for.."/>
                                     </div>
-                                    <div class="col-xs-8 col-md-5">
-                                        <h3>{{model.friendSearch.firstName}} {{model.friendSearch.lastName}}</h3>
+                                    <div class="col-md-4">
+                                        <input ng-model="searchLocation"
+                                               class="form-control"
+                                               type="text"
+                                               placeholder="in city or zip-code.." />
                                     </div>
-                                </a>
+                                    <div class="col-md-4">
+                                        <button type="submit"
+                                                ng-click="model.searchPlaces(searchString,searchLocation)"
+                                                class="btn btn-block btn-success">Search</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="favoritesCount" ng-show="model.user.favorites.length === 0">
+                            <strong><h3>
+                                You haven't added any favorite location. Search locations to add it to your Favorites List.
+                            </h3></strong>
+                        </div>
+                        <div class="favoritesCount" ng-show="model.user.favorites.length == 1">
+                            <strong><h3>
+                                You have marked 1 location as Favorite.
+                            </h3></strong>
+                        </div>
+                        <div class="favoritesCount" ng-show="model.user.favorites.length > 1">
+                            <strong><h3>
+                                You have marked {{model.user.favorites.length}} locations as Favorite.
+                            </h3></strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat = "item in model.user.favorites">
+                            <div class="thumbnail">
+                                <div class="embed-responsive embed-responsive-4by3">
+                                    <a href="#/venue/{{item.venueId}}">
+                                        <image id="searchImage"  ng-src="{{item.venueImage}}"></image>
+                                    </a>
+                                </div>
+                                <div class="caption">
+                                    <a class="noDecoration" href="#/venue/{{item.venueId}}">
+                                        <h4>{{item.venueName | limitTo:33}}</h4>
+                                    </a>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div id="friendsList" class="tab-pane fade">
+                    <div class="row">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="col-md-4">
+                                        <input ng-model="friendName"
+                                               class="form-control"
+                                               name="friendName"
+                                               type="text"
+                                               required
+                                               placeholder="Friend's username">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="submit"
+                                                ng-click="model.findFriend(friendName)"
+                                                class="btn btn-block btn-success">Find friend</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="friendSearchResult" ng-show="model.friendSearch">
                         <div>
-                            <h3>Your Friend List :</h3>
+                            <h3>Displaying result for your friend search</h3>
+                        </div>
+                        <div class="row">
+                            <a href="#/user/friend/{{model.friendSearch._id}}">
+                                <div class="col-xs-4 col-md-1">
+                                    <image id="commentImage"  ng-src="{{model.friendSearch.displayPicture}}"></image>
+                                </div>
+                                <div class="col-xs-8 col-md-5">
+                                    <h3>{{model.friendSearch.firstName}} {{model.friendSearch.lastName}}</h3>
+                                </div>
+                            </a>
+                        </div>
+                        <hr>
+                    </div>
+                    <div id="frndsList">
+                        <div ng-show="model.frnds.length ==0">
+                            <h3>You don't have any friends in your list. Search for a friend above !!</h3>
+                        </div>
+                        <div ng-show="model.frnds.length > 0">
+                            <h3>You have {{model.frnds.length}} friends in your list. Search for friends above</h3>
                         </div>
                         <div class="row" ng-repeat="item in model.frnds">
                             <div class="col-xs-4 col-md-1">
@@ -197,49 +203,26 @@
                             </div>
                         </div>
                     </div>
-                    <div id="friendRequests" class="tab-pane fade">
-                        <div class="row" ng-repeat="item in model.fRequests">
-                            <div class="col-xs-4 col-md-1">
+                </div>
+                <div id="friendRequests" class="tab-pane fade">
+                    <div>
+                        <h3>You have {{model.fRequests.length}} pending requests</h3>
+                    </div>
+                    <div class="row" ng-repeat="item in model.fRequests">
+                        <div class="col-xs-4 col-md-1">
+                            <a href="#/user/friend/{{item._id}}">
+                                <image id="commentImage"  ng-src="{{item.displayPicture}}"></image>
+                            </a>
+                        </div>
+                        <div class="frendListId" class="col-xs-8 col-md-11">
+                            <div class="frendListName" class="row">
                                 <a href="#/user/friend/{{item._id}}">
-                                    <image id="commentImage"  ng-src="{{item.displayPicture}}"></image>
+                                    <h4><strong>{{item.firstName}} {{item.lastName}}</strong></h4>
                                 </a>
                             </div>
-                            <div class="frendListId" class="col-xs-8 col-md-11">
-                                <div class="frendListName" class="row">
-                                    <a href="#/user/friend/{{item._id}}">
-                                        <h4><strong>{{item.firstName}} {{item.lastName}}</strong></h4>
-                                    </a>
-                                </div>
-                                <div class="row">
-                                    <button ng-click="model.requestAccept(item._id)" class="btn btn-primary requestButton">Accept</button>
-                                    <button ng-click="model.requestDeny(item._id)" class="btn btn-default requestButton">Reject</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="photos" class="tab-pane fade">
-                        <div class="favoritesCount" ng-show="model.user.photos.length == 0">
-                            <strong><h3>
-                                You haven't added any photos. Add photo.
-                            </h3></strong>
-                        </div>
-                        <div class="favoritesCount" ng-show="model.user.photos.length == 1">
-                            <strong><h3>
-                                Displaying 1 photo of {{model.user.firstName}}
-                            </h3></strong>
-                        </div>
-                        <div class="favoritesCount" ng-show="model.user.photos.length > 1">
-                            <strong><h3>
-                                Displaying {{model.user.photos.length}} photo of {{model.user.firstName}}
-                            </h3></strong>
-                        </div>
-                        <div class="row">
-                            <div id="photosList" ng-repeat="item in model.user.photos" class="col-xs-12 col-sm-6 col-md-4">
-                                <div class="thumbnail">
-                                    <div class="embed-responsive embed-responsive-4by3">
-                                        <image id="searchImage" ng-src="{{item}}" ></image>
-                                    </div>
-                                </div>
+                            <div class="row">
+                                <button ng-click="model.requestAccept(item._id)" class="btn btn-primary requestButton">Accept</button>
+                                <button ng-click="model.requestDeny(item._id)" class="btn btn-default requestButton">Reject</button>
                             </div>
                         </div>
                     </div>
@@ -247,3 +230,4 @@
             </div>
         </div>
     </div>
+</div>

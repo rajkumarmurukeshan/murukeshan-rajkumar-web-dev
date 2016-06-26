@@ -21,9 +21,25 @@ module.exports = function () {
         addFriend: addFriend,
         removeFriend: removeFriend,
         addToFriendRequest: addToFriendRequest,
-        removeFromFriendRequest: removeFromFriendRequest
+        removeFromFriendRequest: removeFromFriendRequest,
+        addNote: addNote,
+        deleteNote: deleteNote
     };
     return api;
+    
+    function addNote(userId, note) {
+        return ProjectUser.update(
+            {_id: userId},
+            {$push: {notes: note}}
+        );
+    }
+    
+    function deleteNote(userId, note) {
+        return ProjectUser.update(
+            {_id: userId},
+            {$pull: {notes: note}}
+        );
+    }
 
     function addToFriendRequest(userId, friendId) {
         return ProjectUser.update(

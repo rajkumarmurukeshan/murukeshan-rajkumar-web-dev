@@ -26,7 +26,7 @@
                         var day = date.split('-')[2].split("T")[0];
                         var monthIndex = parseInt(date.split('-')[1]);
                         var year = date.split('-')[0];
-                        vm.newDate = monthNames[monthIndex - 1] + " " + day + " " + year;
+                        vm.newDate = monthNames[monthIndex - 1] + " " + day + ", " + year;
                     }
                     vm.fRequests =[];
                     for (var i in vm.user.friendRequest){
@@ -36,9 +36,61 @@
                     for (var i in vm.user.friends){
                         fetchFriendsDetails(vm.user.friends[i]);
                     }
+                    vm.nts= [];
+                    for(var i in vm.user.notes){
+                        fetchNoteDetails(vm.user.notes[i]);
+                    }
+                    
                 });
         }
         init();
+
+        vm.addNote = addNote;
+        vm.deleteNote =deleteNote;
+
+        function deleteNote(note) {
+            XploreUserService
+                .deleteNote(id, note)
+                .then(
+                    function (response) {
+                        vm.deleteNoteStatus = true;
+                        $route.reload();
+                    },
+                    function (error) {
+                        $route.reload();
+                    }
+                )
+        }
+
+        function addNote(noteValue) {
+            var note = {
+                value: noteValue,
+                createdOn: Date.now(),
+                writtenBy: id
+            }
+            XploreUserService
+                .addNote(id, note)
+                .then(
+                    function (response) {
+                        vm.addNoteStatus = true;
+                        $route.reload();
+                    }, function (error) {
+                        $route.reload();
+                    }
+                )
+        }
+
+        function fetchNoteDetails(note) {
+            XploreUserService
+                .findUserById(note.writtenBy)
+                .then(
+                    function(response){
+                        note.writerDetails =response.data;
+                        vm.nts.push(note);
+                    }
+                );
+        }
+        
 
         function fetchUserDetails(usrId) {
             XploreUserService

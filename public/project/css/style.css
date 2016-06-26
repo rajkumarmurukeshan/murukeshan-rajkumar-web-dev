@@ -207,6 +207,7 @@ body {
 
 #favorites{
     padding-top: 27px;
+    padding-bottom: 20px;
 }
 
 #friendsList{
@@ -235,4 +236,49 @@ body {
 
 .frendListName{
     margin-top: -13px;
+}
+
+#timeline {
+    margin-top: 15px;
+}
+
+#postSubmit {
+    margin-bottom: 10px;
+}
+
+#postedBy{
+    margin-left:-18px;
+    margin-top: -13px;
+}
+
+#friendSearchResult {
+    margin-left: 11px;
+    margin-top: 10px;
+}
+
+#frndsList {
+    margin-top: 10px;
+    margin-left: 11px;
+}
+
+#profileDetails{
+    margin-left: 8px;
+}
+
+#profileDetails i {
+    margin-left: 7px;
+    margin-right: 2px;
+}
+
+#profileDetails p{
+    font-size: 15px;
+}
+
+#profileDetails h2{
+    font-size: 30px;
+}
+
+.friendFavorite{
+    margin-left: 12px;
+    margin-top: -25px;
 }

@@ -57,7 +57,7 @@
                 controller: "FriendProfileController",
                 controllerAs: "model",
                 resolve :{
-                    loggedIn: checkLogged
+                    loggedIn: checkLoggedFriend
                 }
             })
             .otherwise({
@@ -108,5 +108,27 @@
                 );
             
         };
+
+        function checkLoggedFriend($q, $location,$rootScope, $routeParams, XploreUserService) {
+            XploreUserService
+                .loggedIn()
+                .then(
+                    function (response) {
+                        var user = response.data;
+                        if(user == '0'){
+                            $rootScope.currentXploreUser = null;
+                        } else {
+                            $rootScope.currentXploreUser = user;
+                            if(user._id === $routeParams.friendId){
+                                $location.url("/user");
+                            }
+                        }
+                    },
+                    function (error) {
+                    }
+                );
+
+        };
+
     }
 })();
