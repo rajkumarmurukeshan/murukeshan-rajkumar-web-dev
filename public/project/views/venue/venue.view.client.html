@@ -93,11 +93,13 @@
                     </div>
                     <div id="commentsList" class="row" ng-repeat="comment in model.cmters | orderBy: '-commentedOn'">
                         <div class="col-xs-4 col-md-1">
-                            <image id="commentImage"  ng-src="{{comment.commentedUser.displayPicture}}"></image>
+                            <image ng-click="#/user/friend/{{comment.commentedUser._id}}" id="commentImage"  ng-src="{{comment.commentedUser.displayPicture}}"></image>
                         </div>
                         <div id="commentBlockId" class="col-xs-8 col-md-11">
                             <div id="commentedUser" class="row">
-                                <h4><strong>{{comment.commentedUser.firstName}}</strong></h4>
+                                <a href="#/user/friend/{{comment.commentedUser._id}}">
+                                    <h4><strong>{{comment.commentedUser.firstName}}</strong></h4>
+                                </a>
                             </div>
                             <div class="row">
                                 <div id="commentValueID" class="col-xs-7 col-md-9">

@@ -1,0 +1,208 @@
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <a href="#/main" id="logo" class="navbar-brand">Xplore</a>
+        <button id="main-toggle" class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse navHeaderCollapse">
+            <ul class="nav navbar-nav navbar-right" >
+                <li ng-hide="currentXploreUser"><a href="#/login?venueId={{model.venueId}}"><h4>Login</h4></a></li>
+                <li ng-hide="currentXploreUser"><a href="#/register"> <h4>Register</h4></a></li>
+                <li ng-show="currentXploreUser"><a href="#/user"><h4>{{currentXploreUser.firstName}}</h4></a></li>
+                <li ng-show="currentXploreUser"><a href="#/user/edit"><h4>Edit Profile</h4></a></li>
+                <li ng-show="currentXploreUser"><a ng-click="model.logout()"><h4>Logout</h4></a></li>
+                <li ng-show="currentXploreUser"><a ng-click="model.unregister()"> <h4>Delete Account</h4></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id="searchResultPage" class="container">
+    <div class="thumbnail">
+        <div class="row">
+            <div class="col-xs-12 col-sm-3 col-md-3">
+                <img id="venueImage" ng-src="{{model.user.displayPicture}}" class="img-rounded">
+            </div>
+            <div class="col-xs-12 col-sm-8 col-sm-offset-1 col-md-8 col-md-offset-1">
+                <h1>{{model.user.firstName}} {{model.user.lastName}}</h1>
+                <p>
+                    <i class="fa fa-envelope"></i>{{model.user.email}} <br>
+                    <i class="fa fa-birthday-cake"></i> {{model.newDate}}
+                </p>
+                <div ng-show="currentXploreUser">
+                    <div ng-show="model.isFriends">
+                        <a ng-click="model.unfriend()">Unfriend</a>
+                    </div>
+                    <div ng-show="model.requestSent">
+                        <a ng-click="model.cancelRequest()">Cancel Friend Request</a>
+                    </div>
+                    <div ng-show="model.notFriends">
+                        <a ng-click="model.addfriend()">Add Friend</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="thumbnail" id="profileBodyThumbnail">
+        <div id="tabs">
+            <ul class="nav nav-pills nav-justified">
+                <li class="active"><a data-toggle="pill" data-target="#timeline">Timeline</a></li>
+                <li><a data-toggle="pill" data-target="#favorites">Favorites</a></li>
+                <li><a data-toggle="pill" data-target="#friendsList">Friends</a></li>
+                <li><a data-toggle="pill" data-target="#photos">Photos</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="timeline" class="tab-pane fade in active">
+                    <div class="row">
+                        <h3>Add Note</h3>
+                    </div>
+                    <div class="row">
+                        <form>
+                            <textarea type="text"
+                                      rows="3"
+                                      name="note"
+                                      id="note"
+                                      ng-model="commentValue"
+                                      required class="form-control">
+                            </textarea>
+                            <button ng-click="model.addComment(commentValue)" class="btn btn-primary">Done</button>
+                        </form>
+                    </div>
+                </div>
+                <div id="favorites" class="tab-pane fade">
+                    <div>
+                        <form>
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                    <div class="col-md-4">
+                                        <input ng-model="searchString"
+                                               class="form-control"
+                                               type="text"
+                                               placeholder="I'm looking for.."/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input ng-model="searchLocation"
+                                               class="form-control"
+                                               type="text"
+                                               placeholder="in city or zip-code.." />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="submit"
+                                                ng-click="model.searchPlaces(searchString,searchLocation)"
+                                                class="btn btn-block btn-success">Search</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="favoritesCount" ng-show="model.user.favorites.length === 0">
+                            <strong><h3>
+                                You haven't added any favorite location. Search locations to add it to your Favorites List.
+                            </h3></strong>
+                        </div>
+                        <div class="favoritesCount" ng-show="model.user.favorites.length == 1">
+                            <strong><h3>
+                                You have marked 1 location as Favorite.
+                            </h3></strong>
+                        </div>
+                        <div class="favoritesCount" ng-show="model.user.favorites.length > 1">
+                            <strong><h3>
+                                You have marked {{model.user.favorites.length}} locations as Favorite.
+                            </h3></strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat = "item in model.user.favorites">
+                            <div class="thumbnail">
+                                <div class="embed-responsive embed-responsive-4by3">
+                                    <a href="#/venue/{{item.venueId}}">
+                                        <image id="searchImage"  ng-src="{{item.venueImage}}"></image>
+                                    </a>
+                                </div>
+                                <div class="caption">
+                                    <a class="noDecoration" href="#/venue/{{item.venueId}}">
+                                        <h4>{{item.venueName | limitTo:33}}</h4>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="friendsList" class="tab-pane fade">
+                    <div class="row">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="col-md-4">
+                                        <input ng-model="friendName"
+                                               class="form-control"
+                                               name="friendName"
+                                               type="text"
+                                               required
+                                               placeholder="Friend's username">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="submit"
+                                                ng-click="model.findFriend(friendName)"
+                                                class="btn btn-block btn-success">Find friend</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div ng-show="model.friendSearch == null">
+                        <h3>Displaying 0 result for ur friend search</h3>
+                    </div>
+                    <div ng-show="model.friendSearch">
+                        <div class="row">
+                            <h3>Displaying 1 result for ur friend search</h3>
+                        </div>
+                        <div class="row">
+                            <a href="#/user/friend/{{model.friendSearch._id}}">
+                                <div class="col-xs-4 col-md-1">
+                                    <image id="commentImage"  ng-src="{{model.friendSearch.displayPicture}}"></image>
+                                </div>
+                                <div class="col-xs-8 col-md-5">
+                                    <h3>{{model.friendSearch.firstName}} {{model.friendSearch.lastName}}</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+                <div id="photos" class="tab-pane fade">
+                    <div class="favoritesCount" ng-show="model.user.photos.length == 0">
+                        <strong><h3>
+                            You haven't added any photos. Add photo.
+                        </h3></strong>
+                    </div>
+                    <div class="favoritesCount" ng-show="model.user.photos.length == 1">
+                        <strong><h3>
+                            Displaying 1 photo of {{model.user.firstName}}
+                        </h3></strong>
+                    </div>
+                    <div class="favoritesCount" ng-show="model.user.photos.length > 1">
+                        <strong><h3>
+                            Displaying {{model.user.photos.length}} photo of {{model.user.firstName}}
+                        </h3></strong>
+                    </div>
+                    <div class="row">
+                        <div id="photosList" ng-repeat="item in model.user.photos" class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="thumbnail">
+                                <div class="embed-responsive embed-responsive-4by3">
+                                    <image id="searchImage" ng-src="{{item}}" ></image>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

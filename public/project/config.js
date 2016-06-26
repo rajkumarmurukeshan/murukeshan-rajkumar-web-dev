@@ -52,9 +52,17 @@
                     loggedIn: checkLogged
                 }
             })
+            .when("/user/friend/:friendId", {
+                templateUrl: "views/user/friend-profile.view.client.html",
+                controller: "FriendProfileController",
+                controllerAs: "model",
+                resolve :{
+                    loggedIn: checkLogged
+                }
+            })
             .otherwise({
                 redirectTo: "/main"
-            })
+            });
 
 
         function checkLoggedIn($q, $location,$rootScope, XploreUserService) {

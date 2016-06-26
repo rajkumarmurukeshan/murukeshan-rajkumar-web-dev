@@ -1,16 +1,17 @@
 (function () {
     angular
         .module("Xplore")
-        .controller("XploreProfileController", ProfileController)
+        .controller("FriendProfileController", FriendProfileController)
 
-    function ProfileController($routeParams, $route, $rootScope, XploreUserService, $location) {
+    function FriendProfileController($routeParams, $route, $rootScope, XploreUserService, $location) {
         
         var vm = this;
-        var id = $rootScope.currentXploreUser._id;
+        var currUser= $rootScope.currentXploreUser;
+        var friendId = $routeParams.friendId;
 
         function init() {
             XploreUserService
-                .findUserById(id)
+                .findUserById(friendId)
                 .then(function (response) {
                     vm.user = response.data;
                     var monthNames = [
@@ -28,55 +29,35 @@
                         var year = date.split('-')[0];
                         vm.newDate = monthNames[monthIndex - 1] + " " + day + " " + year;
                     }
-                    vm.fRequests =[];
-                    for (var i in vm.user.friendRequest){
-                        fetchUserDetails(vm.user.friendRequest[i]);
-                    }
-                    vm.frnds = [];
-                    for (var i in vm.user.friends){
-                        fetchFriendsDetails(vm.user.friends[i]);
-                    }
+                    XploreUserService
+                        .findUserById(currUser._id)
+                        .then(
+                            function (response) {
+                                var refreshedUser = response.data;
+                                if(refreshedUser && (refreshedUser.friends.indexOf(vm.user._id) > -1) && (vm.user.friends.indexOf(currUser._id) > -1)){
+                                    vm.isFriends = true;
+                                }
+                                if(refreshedUser && (refreshedUser.friends.indexOf(vm.user._id) > -1) && (vm.user.friends.indexOf(currUser._id) === -1)){
+                                    vm.requestSent = true;
+                                }
+                                if(refreshedUser && (refreshedUser.friends.indexOf(vm.user._id) === -1) && (vm.user.friends.indexOf(currUser._id) === -1)){
+                                    vm.notFriends = true;
+                                }
+                            }
+                        )
                 });
         }
         init();
 
-        function fetchUserDetails(usrId) {
-            XploreUserService
-                .findUserById(usrId)
-                .then(
-                    function(response){
-                        vm.fRequests.push(response.data);
-                        return response.data;
-                    },
-                    function (error) {
-                        return null;
-                    }
-                );
-        }
+        vm.addfriend = addfriend;
 
-        function fetchFriendsDetails(usrId) {
+        function addfriend() {
             XploreUserService
-                .findUserById(usrId)
-                .then(
-                    function(response){
-                        vm.frnds.push(response.data);
-                        return response.data;
-                    },
-                    function (error) {
-                        return null;
-                    }
-                );
-        }
-        
-        vm.requestAccept = requestAccept;
-        
-        function requestAccept(friendId) {
-            XploreUserService
-                .removeFromFriendRequest(id, friendId)
+                .addFriend(currUser._id,friendId)
                 .then(
                     function (response) {
                         XploreUserService
-                            .addFriend(id,friendId)
+                            .addToFriendRequest(friendId,currUser._id)
                             .then(
                                 function (response) {
                                     $route.reload();
@@ -85,22 +66,22 @@
                                     $route.reload();
                                 }
                             )
-                    }, 
+                    },
                     function (error) {
                         $route.reload();
                     }
-                );
+                )
         }
 
-        vm.requestDeny = requestDeny;
+        vm.cancelRequest = cancelRequest;
 
-        function requestDeny(friendId) {
+        function cancelRequest() {
             XploreUserService
-                .removeFromFriendRequest(id, friendId)
+                .removeFromFriendRequest(friendId,currUser._id)
                 .then(
                     function (response) {
                         XploreUserService
-                            .removeFriend(friendId, id)
+                            .removeFriend(currUser._id,friendId)
                             .then(
                                 function (response) {
                                     $route.reload();
@@ -116,12 +97,30 @@
                 );
         }
 
+        vm.unfriend =unfriend;
 
-        vm.searchPlaces = function (searchString,searchLocation) {
-            $location.url("/searchResult/"+searchString+"/"+searchLocation);
-        };
+        function unfriend() {
+            XploreUserService
+                .removeFriend(friendId,currUser._id)
+                .then(
+                    function (response) {
+                        XploreUserService
+                            .removeFriend(currUser._id,friendId)
+                            .then(
+                                function (response) {
+                                    $route.reload();
+                                },
+                                function (error) {
+                                    $route.reload();
+                                }
+                            )
+                    },
+                    function (error) {
+                        $route.reload();
+                    }
+                );
+        }
 
-        vm.updateUser = updateUser;
         vm.unregister = unregisterUser;
         vm.logout = logout;
 
@@ -156,19 +155,6 @@
                 );
         }
 
-        function updateUser() {
-            XploreUserService
-                .updateUser(id, vm.user)
-                .then(
-                    function (response) {
-                        vm.success = "Updated successfully";
-                        $location.url("/user");
-                    },
-                    function (error) {
-                        vm.error = "Unable to update user"
-                    }
-                );
-        }
 
         vm.findFriend = findFriend;
         

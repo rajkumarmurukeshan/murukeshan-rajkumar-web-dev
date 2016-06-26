@@ -30,6 +30,74 @@ module.exports = function (app, models) {
             successRedirect: '/project/#/user',
             failureRedirect: '/project/#/login'
         }));
+
+    app.put("/api/project/addFriend", addFriend);
+    app.put("/api/project/removeFriend", removeFriend);
+    app.put("/api/project/addToFriendRequest", addToFriendRequest);
+    app.put("/api/project/removeFromFriendRequest", removeFromFriendRequest);
+
+
+    function addFriend(req, res) {
+        var userId = req.body.userId;
+        var friendId = req.body.friendId;
+        userModelProject
+            .addFriend(userId, friendId)
+            .then(
+                function (stats) {
+                    res.send(stats);
+                },
+                function (error) {
+                    res.send(error);
+                }
+            );
+    }
+
+    function removeFriend(req, res) {
+        var userId = req.body.userId;
+        var friendId = req.body.friendId;
+        userModelProject
+            .removeFriend(userId, friendId)
+            .then(
+                function (stats) {
+                    res.send(stats);
+                },
+                function (error) {
+                    res.send(error);
+                }
+            );
+    }
+
+    function addToFriendRequest(req, res) {
+        var userId = req.body.userId;
+        var friendId = req.body.friendId;
+        userModelProject
+            .addToFriendRequest(userId, friendId)
+            .then(
+                function (stats) {
+                    res.send(stats);
+                },
+                function (error) {
+                    res.send(error);
+                }
+            );
+    }
+
+    function removeFromFriendRequest(req, res) {
+        var userId = req.body.userId;
+        var friendId = req.body.friendId;
+        userModelProject
+            .removeFromFriendRequest(userId, friendId)
+            .then(
+                function (stats) {
+                    res.send(stats);
+                },
+                function (error) {
+                    res.send(error);
+                }
+            );
+    }
+    
+    
     
     function addFavorite(req, res) {
         var userId = req.body.userId;

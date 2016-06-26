@@ -16,10 +16,46 @@
             updateUser: updateUser,
             deleteUser: deleteUser,
             addFavorite: addFavorite,
-            removeFavorite: removeFavorite
+            removeFavorite: removeFavorite,
+            addFriend: addFriend,
+            removeFriend: removeFriend,
+            addToFriendRequest: addToFriendRequest,
+            removeFromFriendRequest: removeFromFriendRequest
         };
 
         return api;
+        
+        function addToFriendRequest(userId, friendId) {
+            var body = {
+                userId: userId,
+                friendId: friendId
+            }
+            return $http.put("/api/project/addToFriendRequest", body);
+        }
+
+        function removeFromFriendRequest(userId, friendId) {
+            var body = {
+                userId: userId,
+                friendId: friendId
+            }
+            return $http.put("/api/project/removeFromFriendRequest", body);
+        }
+
+        function addFriend(userId, friendId) {
+            var body = {
+                userId: userId,
+                friendId: friendId
+            };
+            return $http.put("/api/project/addFriend", body);
+        }
+
+        function removeFriend(userId, friendId) {
+            var body = {
+                userId: userId,
+                friendId: friendId
+            }
+            return $http.put("/api/project/removeFriend", body);
+        }
 
         function addFavorite(userId,venue) {
             var body = {

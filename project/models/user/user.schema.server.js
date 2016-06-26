@@ -37,6 +37,7 @@ module.exports = function () {
         phone: String,
         dob: Date,
         friends: [{type: mongoose.Schema.ObjectId, ref: "ProjectUser"}],
+        friendRequest: [{type: mongoose.Schema.ObjectId, ref: "ProjectUser"}],
         displayPicture: {type: String, default: "images/defaultDisplayPic.jpg"},
         dateCreated: {type: Date, default: Date.now()}
     }, {collection: "project.user"});

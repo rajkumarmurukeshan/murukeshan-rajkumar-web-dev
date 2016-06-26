@@ -17,36 +17,69 @@ module.exports = function () {
         addToFavorites: addToFavorites,
         removeFromFavorites: removeFromFavorites,
         addToBucketList: addToBucketList,
-        removeFromBucketList: removeFromBucketList
+        removeFromBucketList: removeFromBucketList,
+        addFriend: addFriend,
+        removeFriend: removeFriend,
+        addToFriendRequest: addToFriendRequest,
+        removeFromFriendRequest: removeFromFriendRequest
     };
     return api;
+
+    function addToFriendRequest(userId, friendId) {
+        return ProjectUser.update(
+            {_id: userId},
+            {$push: {friendRequest: friendId}}
+        );
+    }
+
+    function removeFromFriendRequest(userId, friendId) {
+        return ProjectUser.update(
+            {_id: userId},
+            {$pull: {friendRequest: friendId}}
+        );
+    }
+
+
+    function addFriend(userId, friendId) {
+        return ProjectUser.update(
+            {_id: userId},
+            {$push: {friends: friendId}}
+        );
+    }
+
+    function removeFriend(userId, friendId) {
+        return ProjectUser.update(
+            {_id: userId},
+            {$pull: {friends: friendId}}
+        );
+    }    
 
     function addToBucketList(userId, venue) {
         return ProjectUser.update(
             {_id: userId},
             {$push : {bucketList: venue}}
-        )
+        );
     }
 
     function removeFromBucketList(userId, venue) {
         return ProjectUser.update(
             {_id: userId},
             {$pull : {bucketList: venue}}
-        )
+        );
     }
     
     function addToFavorites(userId, venue) {
         return ProjectUser.update(
             {_id: userId},
             {$push : {favorites: venue}}
-        )
+        );
     }
     
     function removeFromFavorites(userId, venueId) {
         return ProjectUser.update(
             {_id: userId},
             {$pull : {favorites: {venueId: venueId}}}
-        )
+        );
     }
 
     function findUserByGoogleId(googleId) {

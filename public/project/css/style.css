@@ -205,3 +205,34 @@ body {
     text-decoration: none;
 }
 
+#favorites{
+    padding-top: 27px;
+}
+
+#friendsList{
+    padding-top: 27px;
+}
+
+.favoritesCount{
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+#friendRequests{
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.requestButton{
+    margin-top: -5px;
+    font-size:11px;
+}
+
+
+.frendListId {
+    margin-top: 3px;
+}
+
+.frendListName{
+    margin-top: -13px;
+}
