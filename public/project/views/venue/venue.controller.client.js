@@ -15,13 +15,23 @@
                     function (response) {
                         vm.venueDetails = response.data.response.venue;
                         parseVenueDetails();
-                        isFavorite();
                         XploreVenueService
                             .findVenueById(vm.venueId)
                             .then(
                                 function (response) {
                                     console.log(response.data);
                                     var venue = response.data;
+                                    console.log(venue.favoriteOf.indexOf(vm.user._id));
+                                    if(venue.favoriteOf.indexOf(vm.user)>= -1){
+                                        console.log("otha");
+                                        vm.isFavorite = true;
+                                        vm.isNotFavorite = false;
+                                    } else {
+                                        console.log("omale");
+                                        vm.isFavorite = false;
+                                        vm.isNotFavorite = true;
+                                    }
+                                    console.log(vm.isFavorite);
                                     vm.cmters=[];
                                     if(venue){
                                         for (var i in venue.comments){
@@ -95,7 +105,7 @@
         }
 
 
-        function isFavorite() {
+        /*function isFavorite() {
             if(vm.user){
                 XploreVenueService
                     .isFavoriteOf(vm.venueId, vm.user._id)
@@ -122,7 +132,7 @@
                 vm.isNotFavorite = false;
             }
             console.log(vm.isFavorite, vm.isNotFavorite );
-        }
+        }*/
 
 
         vm.removeFavorite = removeFavorite;
