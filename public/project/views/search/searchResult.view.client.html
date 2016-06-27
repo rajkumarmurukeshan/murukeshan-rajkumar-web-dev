@@ -18,7 +18,7 @@
     </div>
 </nav>
 <div id="searchResultPage" class="container pageBody">
-    <form>
+    <form id="searchForm" name="searchForm">
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
@@ -26,25 +26,30 @@
                     <input ng-model="searchString"
                            class="form-control"
                            type="text"
+                           id="searchString"
+                           name="searchString"
+                           required
                            placeholder="I'm looking for.."/>
                 </div>
                 <div class="col-md-4">
                     <input ng-model="searchLocation"
                            class="form-control"
+                           name="searchLocation"
+                           id="searchLocation"
                            type="text"
-                           placeholder="in city or zip-code.." />
+                           required placeholder="in city or zip-code.." />
                 </div>
                 <div class="col-md-4">
                     <button type="submit"
                             ng-click="model.searchPlaces(searchString,searchLocation)"
-                            class="btn btn-block btn-primary">Search</button>
+                            class="btn btn-block btn-success">Search</button>
                 </div>
             </div>
             <div class="col-md-2"></div>
         </div>
     </form>
 
-    <div class="container"
+    <div class="container thumbnail"
          id="searchResult">
         <div ng-show= "model.setFlag">
             <h3 id="resultTag">Xplored {{model.searchResultCount}} locations for {{model.searchString}} in {{model.searchLocation}}  </h3>

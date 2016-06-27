@@ -170,7 +170,12 @@
 
 
         vm.searchPlaces = function (searchString,searchLocation) {
-            $location.url("/searchResult/"+searchString+"/"+searchLocation);
+            if(searchString == null || searchString.trim === "" || searchString == undefined
+                || searchLocation == null || searchLocation.trim === "" || searchLocation == undefined){
+                vm.error = "Please enter a valid location and a search query"
+            } else {
+                $location.url("/searchResult/"+searchString+"/"+searchLocation);
+            }
         };
 
         vm.updateUser = updateUser;

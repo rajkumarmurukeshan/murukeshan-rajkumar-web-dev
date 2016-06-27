@@ -29,21 +29,21 @@
                     <i class="fa fa-envelope"></i> {{model.user.email}} <br>
                     <i class="fa fa-birthday-cake"></i> {{model.newDate}}
                 </p>
-                <div ng-show="currentXploreUser">
+                <div id="frendReq" ng-show="currentXploreUser">
                     <div ng-show="model.isFriends">
-                        <a ng-click="model.unfriend()">Unfriend</a>
+                        <a ng-click="model.unfriend()"><h4>Unfriend</h4></a>
                     </div>
                     <div ng-show="model.requestSent">
-                        <a ng-click="model.cancelRequest()">Cancel Friend Request</a>
+                        <a ng-click="model.cancelRequest()"><h4>Cancel Friend Request</h4></a>
                     </div>
                     <div ng-show="model.notFriends">
-                        <a ng-click="model.addfriend()">Add Friend</a>
+                        <a ng-click="model.addfriend()"><h4>Add Friend</h4></a>
                     </div>
                     <div ng-show="model.accptFrend">
-                        <a ng-click="model.requestAccept()">Accept Friend Request</a>
+                        <a ng-click="model.requestAccept()"><h4>Accept Friend Request</h4></a>
                     </div>
                     <div ng-show="model.accptFrend">
-                        <a ng-click="model.requestDeny()">Reject Friend Request</a>
+                        <a ng-click="model.requestDeny()"><h4>Reject Friend Request</h4></a>
                     </div>
                 </div>
             </div>

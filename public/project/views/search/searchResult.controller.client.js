@@ -55,32 +55,42 @@
         }
 
         vm.searchPlaces = function (searchString,searchLocation) {
-            $location.url("/searchResult/"+searchString+"/"+searchLocation);
+            if(searchString == null || searchString.trim === "" || searchString == undefined
+                || searchLocation == null || searchLocation.trim === "" || searchLocation == undefined){
+                vm.error = "Please enter a valid location and a search query"
+            } else {
+                $location.url("/searchResult/"+searchString+"/"+searchLocation);
+            }
         };
         
         function searchPlaces(searchString,searchLocation) {
-            FoursquareService
-                .getPlaces(searchString,searchLocation)
-                .then(
-                    function (response) {
-                        var groups= response.data.response.groups;
-                        vm.out = fetchItems(groups);
-                        vm.searchResultCount = vm.out.length;
-                        vm.searchString = searchString;
-                        vm.searchLocation = searchLocation;
-                    },
-                    function (error){
-                        vm.out= [];
-                        vm.searchResultCount = vm.out.length;
-                        vm.searchString = searchString;
-                        vm.searchLocation = searchLocation;
-                    }
-                )
-                .then(
-                    function () {
-                        vm.setFlag = true;
-                    }
-                )
+            if(searchString == null || searchString == undefined
+                || searchLocation == null || searchLocation == undefined){
+                vm.error = "Please enter a valid location and a search query"
+            } else {
+                FoursquareService
+                    .getPlaces(searchString,searchLocation)
+                    .then(
+                        function (response) {
+                            var groups= response.data.response.groups;
+                            vm.out = fetchItems(groups);
+                            vm.searchResultCount = vm.out.length;
+                            vm.searchString = searchString;
+                            vm.searchLocation = searchLocation;
+                        },
+                        function (error){
+                            vm.out= [];
+                            vm.searchResultCount = vm.out.length;
+                            vm.searchString = searchString;
+                            vm.searchLocation = searchLocation;
+                        }
+                    )
+                    .then(
+                        function () {
+                            vm.setFlag = true;
+                        }
+                    );
+            }
         }
 
         function fetchItems(groups){
