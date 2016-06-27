@@ -93,7 +93,9 @@
                                     {{note.value}}
                                 </div>
                                 <div class="col-xs-1 col-md-1">
-                                    <button id="deleteButton" ng-click="model.deleteNote(note)" class="btn btn-primary pull-right">Delete</button>
+                                    <button ng-show="model.xplrUsr && (note.writtenBy == model.xplrUsr._id)"
+                                            id="deleteButton"
+                                            ng-click="model.deleteNote(note)" class="btn btn-primary pull-right">Delete</button>
                                 </div>
                             </div>
                         </div>

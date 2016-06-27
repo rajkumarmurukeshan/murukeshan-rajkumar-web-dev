@@ -8,6 +8,7 @@
         var vm = this;
         var currUser= $rootScope.currentXploreUser;
         var friendId = $routeParams.friendId;
+        vm.xplrUsr = $rootScope.currentXploreUser;
 
         function init() {
             XploreUserService
@@ -43,9 +44,6 @@
                                 if(refreshedUser && (refreshedUser.friends.indexOf(vm.user._id) === -1) && (vm.user.friends.indexOf(currUser._id) === -1)){
                                     vm.notFriends = true;
                                 }
-                                console.log(refreshedUser);
-                                console.log(vm.user);
-                                console.log(refreshedUser.friendRequest.indexOf(vm.user._id));
                                 if(refreshedUser && 
                                     (refreshedUser.friends.indexOf(vm.user._id) === -1) && 
                                     (vm.user.friends.indexOf(currUser._id) > -1) &&
@@ -261,6 +259,42 @@
                         $rootScope.currentXploreUser = null
                     }
                 );
+        }
+
+        vm.deleteNote =deleteNote;
+
+        function deleteNote(note) {
+            XploreUserService
+                .deleteNote(friendId, note)
+                .then(
+                    function (response) {
+                        vm.deleteNoteStatus = true;
+                        $route.reload();
+                    },
+                    function (error) {
+                        $route.reload();
+                    }
+                )
+        }
+
+        vm.addNote = addNote;
+
+        function addNote(noteValue) {
+            var note = {
+                value: noteValue,
+                createdOn: Date.now(),
+                writtenBy: currUser
+            }
+            XploreUserService
+                .addNote(friendId, note)
+                .then(
+                    function (response) {
+                        vm.addNoteStatus = true;
+                        $route.reload();
+                    }, function (error) {
+                        $route.reload();
+                    }
+                )
         }
 
 
