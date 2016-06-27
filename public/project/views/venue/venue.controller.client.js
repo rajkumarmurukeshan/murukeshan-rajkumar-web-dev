@@ -9,30 +9,30 @@
         vm.user = $rootScope.currentXploreUser;
 
         function init() {
-            XploreVenueService
-                .findVenueById(vm.venueId)
-                .then(
-                    function (response) {
-                        var venue = response.data;
-                        vm.cmters=[];
-                        if(venue){
-                            for (var i in venue.comments){
-                                var cmt = venue.comments[i];
-                                fetchUserDetails(cmt);
-                            }
-                        }
-                        isFavorite();
-                    },
-                    function (error) {
-                        vm.cmters=[];
-                    }
-                );
             FoursquareService
                 .findVenueById(vm.venueId)
                 .then(
                     function (response) {
                         vm.venueDetails = response.data.response.venue;
                         parseVenueDetails();
+                        isFavorite();
+                        XploreVenueService
+                            .findVenueById(vm.venueId)
+                            .then(
+                                function (response) {
+                                    var venue = response.data;
+                                    vm.cmters=[];
+                                    if(venue){
+                                        for (var i in venue.comments){
+                                            var cmt = venue.comments[i];
+                                            fetchUserDetails(cmt);
+                                        }
+                                    }
+                                },
+                                function (error) {
+                                    vm.cmters=[];
+                                }
+                            );
                     }
                 );
         }
@@ -59,29 +59,6 @@
 
         init();
 
-        /*vm.originalComments =
-
-         function originalComments() {
-         var updatedComments =[];
-         for (var cmnt in vm.comments){
-         console.log(vm.comments[cmnt]);
-         var cmt = vm.comments[cmnt];
-         cmt.commentedUser =
-         XploreUserService
-         .findUserById(cmt.commentedBy)
-         .then(
-         function(response){
-         console.log(response.data);
-         return response.data;
-         },
-         function (error) {
-         return null;
-         }
-         );
-         updatedComments.push(cmt);
-         }
-         vm.newComments= updatedComments;
-         }*/
 
         function parseVenueDetails() {
             vm.photosURL=[];
@@ -118,12 +95,13 @@
 
 
         function isFavorite() {
-            if($rootScope.currentXploreUser){
+            if(vm.user){
                 XploreVenueService
-                    .isFavoriteOf(vm.venueId, $rootScope.currentXploreUser._id)
+                    .isFavoriteOf(vm.venueId, vm.user)
                     .then(
                         function (response) {
                             var venue = response.data;
+                            console.log(venue);
                             if(venue){
                                 vm.isFavorite = true;
                                 vm.isNotFavorite = false;
@@ -137,6 +115,9 @@
                             vm.isNotFavorite = true;
                         }
                     )
+            } else {
+                vm.isFavorite = false;
+                vm.isNotFavorite = false;
             }
         }
 

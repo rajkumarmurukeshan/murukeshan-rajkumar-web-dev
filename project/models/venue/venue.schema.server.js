@@ -4,6 +4,7 @@ module.exports = function () {
 
     var VenueSchemaProject = mongoose.Schema({
         venueId: String,
+        venueName: String,
         owners: [{type: mongoose.Schema.ObjectId, ref: "ProjectUser"}],
         comments: [{
             value: String,
