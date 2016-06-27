@@ -22,12 +22,15 @@
                                     console.log(response.data);
                                     var venue = response.data;
                                     console.log(venue.favoriteOf.indexOf(vm.user._id));
-                                    if(venue.favoriteOf.indexOf(vm.user)>= -1){
-                                        console.log("otha");
-                                        vm.isFavorite = true;
-                                        vm.isNotFavorite = false;
+                                    if(venue){
+                                        if(venue.favoriteOf.indexOf(vm.user)> -1){
+                                            vm.isFavorite = true;
+                                            vm.isNotFavorite = false;
+                                        } else {
+                                            vm.isFavorite = false;
+                                            vm.isNotFavorite = true;
+                                        }
                                     } else {
-                                        console.log("omale");
                                         vm.isFavorite = false;
                                         vm.isNotFavorite = true;
                                     }
