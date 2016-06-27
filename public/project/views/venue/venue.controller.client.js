@@ -97,7 +97,7 @@
         function isFavorite() {
             if(vm.user){
                 XploreVenueService
-                    .isFavoriteOf(vm.venueId, vm.user)
+                    .isFavoriteOf(vm.venueId, vm.user._id)
                     .then(
                         function (response) {
                             var venue = response.data;
@@ -106,6 +106,7 @@
                                 vm.isFavorite = true;
                                 vm.isNotFavorite = false;
                             } else {
+                                console.log("hel");
                                 vm.isFavorite = false;
                                 vm.isNotFavorite = true;
                             }
@@ -119,6 +120,7 @@
                 vm.isFavorite = false;
                 vm.isNotFavorite = false;
             }
+            console.log(vm.isFavorite, vm.isNotFavorite );
         }
 
 
