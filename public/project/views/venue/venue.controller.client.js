@@ -19,10 +19,8 @@
                             .findVenueById(vm.venueId)
                             .then(
                                 function (response) {
-                                    console.log(response.data);
                                     var venue = response.data;
                                     if(venue){
-                                        console.log(venue.favoriteOf.indexOf(vm.user._id));
                                         if(venue.favoriteOf.indexOf(vm.user._id)> -1){
                                             vm.isFavorite = true;
                                             vm.isNotFavorite = false;
@@ -34,7 +32,6 @@
                                         vm.isFavorite = false;
                                         vm.isNotFavorite = true;
                                     }
-                                    console.log(vm.isFavorite);
                                     vm.cmters=[];
                                     if(venue){
                                         for (var i in venue.comments){
@@ -107,37 +104,7 @@
             }
         }
 
-
-        /*function isFavorite() {
-            if(vm.user){
-                XploreVenueService
-                    .isFavoriteOf(vm.venueId, vm.user._id)
-                    .then(
-                        function (response) {
-                            var venue = response.data;
-                            console.log(venue);
-                            if(venue){
-                                vm.isFavorite = true;
-                                vm.isNotFavorite = false;
-                            } else {
-                                console.log("hel");
-                                vm.isFavorite = false;
-                                vm.isNotFavorite = true;
-                            }
-                        },
-                        function (error) {
-                            vm.isFavorite = false;
-                            vm.isNotFavorite = true;
-                        }
-                    )
-            } else {
-                vm.isFavorite = false;
-                vm.isNotFavorite = false;
-            }
-            console.log(vm.isFavorite, vm.isNotFavorite );
-        }*/
-
-
+        
         vm.removeFavorite = removeFavorite;
 
         function removeFavorite() {
