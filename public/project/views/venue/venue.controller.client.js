@@ -16,16 +16,15 @@
                         var venue = response.data;
                         vm.cmters=[];
                         if(venue){
-                            vm.comments= venue.comments;
-                            var updatedComments =[];
                             for (var i in venue.comments){
                                 var cmt = venue.comments[i];
                                 fetchUserDetails(cmt);
                             }
-                            vm.newComments= updatedComments;
-                        } else {
-                            vm.comments=[];
                         }
+                        isFavorite();
+                    },
+                    function (error) {
+                        vm.cmters=[];
                     }
                 );
             FoursquareService
@@ -36,7 +35,6 @@
                         parseVenueDetails();
                     }
                 );
-            isFavorite();
         }
 
         function fetchUserDetails(cmt) {
@@ -128,16 +126,17 @@
                             var venue = response.data;
                             if(venue){
                                 vm.isFavorite = true;
+                                vm.isNotFavorite = false;
                             } else {
+                                vm.isFavorite = false;
                                 vm.isNotFavorite = true;
                             }
                         },
                         function (error) {
+                            vm.isFavorite = false;
                             vm.isNotFavorite = true;
                         }
                     )
-            } else {
-                vm.isNotFavorite = true;
             }
         }
 
