@@ -20,6 +20,7 @@
                             .findVenueById(vm.venueId)
                             .then(
                                 function (response) {
+                                    console.log(response.data);
                                     var venue = response.data;
                                     vm.cmters=[];
                                     if(venue){
