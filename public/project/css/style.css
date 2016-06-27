@@ -75,6 +75,13 @@ body {
     width: 100%;
 }
 
+#editProfilePage{
+    margin-top: 71px;
+    padding-left: 21px;
+    padding-right: 23px;
+    padding-bottom: 15px;
+}
+
 #searchResultPage {
     padding-top: 90px;
     padding-bottom: 20px;

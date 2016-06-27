@@ -194,18 +194,21 @@
         }
 
         function unregisterUser() {
-            XploreUserService
-                .deleteUser(id)
-                .then(
-                    function(response){
-                        $location.url("/main");
-                        $rootScope.currentXploreUser = null
-                    },
-                    function(error) {
-                        vm.error = "Unable to remove user"
-                        $rootScope.currentXploreUser = null
-                    }
-                );
+            var confirmation = confirm("Are you sure to delete your account ?");
+            if(confirmation){
+                XploreUserService
+                    .deleteUser(id)
+                    .then(
+                        function(response){
+                            $location.url("/main");
+                            $rootScope.currentXploreUser = null
+                        },
+                        function(error) {
+                            vm.error = "Unable to remove user"
+                            $rootScope.currentXploreUser = null
+                        }
+                    );
+            }
         }
 
         function updateUser() {
