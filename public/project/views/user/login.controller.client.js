@@ -24,11 +24,11 @@
                                 $location.url("/user");
                             }
                         } else {
-                            vm.error = "User not found";
+                            vm.error = "Invalid Credentials";
                         }
                     },
                     function (error) {
-                        vm.error = "User not found !!"
+                        vm.error = "Invalid Credentials"
                     });
             }
         };
@@ -36,5 +36,6 @@
         vm.register = function() {
             $location.url("/register");
         }
+        
     }
 })();

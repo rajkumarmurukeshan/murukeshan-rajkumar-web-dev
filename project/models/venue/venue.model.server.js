@@ -14,9 +14,19 @@ module.exports = function () {
         deleteComment: deleteComment,
         addFavoriteOf: addFavoriteOf,
         removeFavoriteOf: removeFavoriteOf,
-        isFavoriteOf: isFavoriteOf
+        isFavoriteOf: isFavoriteOf,
+        deleteVenue: deleteVenue,
+        getAllVenue: getAllVenue
     };
     return api;
+    
+    function deleteVenue(venueId) {
+        return Venue.remove({"venueId" : venueId});
+    }
+    
+    function getAllVenue() {
+        return Venue.find();
+    }
 
     function findVenueByVenueId(venueId) {
         return Venue.findOne({"venueId": venueId});

@@ -282,3 +282,62 @@ body {
     margin-left: 12px;
     margin-top: -25px;
 }
+
+#adminUserImage {
+    height: 58px;
+    width: 55px;
+}
+
+#adminUserList {
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+#adminUserList h3 {
+    margin-bottom: 22px;
+}
+
+#adminUsers {
+    margin-top: -8px;
+}
+
+#adminUserSection{
+    padding: 10px;
+}
+
+#deleteAdminButton{
+    margin-top: 5px;
+    margin-right: -60px;
+    margin-left: -3px;
+    font-size:11px;
+}
+
+
+#adminVenueImage {
+    height: 58px;
+    width: 55px;
+}
+
+#adminVenueList {
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+#adminVenueList h3 {
+    margin-bottom: 22px;
+}
+
+#adminVenue {
+    margin-top: -8px;
+}
+
+#adminVenueSection{
+    padding: 10px;
+}
+
+#deleteVenueAdminButton{
+    margin-top: 5px;
+    margin-right: -60px;
+    margin-left: -3px;
+    font-size:11px;
+}

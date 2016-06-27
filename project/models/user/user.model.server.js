@@ -23,10 +23,15 @@ module.exports = function () {
         addToFriendRequest: addToFriendRequest,
         removeFromFriendRequest: removeFromFriendRequest,
         addNote: addNote,
-        deleteNote: deleteNote
+        deleteNote: deleteNote,
+        getUsers: getUsers
     };
     return api;
-    
+
+    function getUsers() {
+        return ProjectUser.find();
+    }
+
     function addNote(userId, note) {
         return ProjectUser.update(
             {_id: userId},

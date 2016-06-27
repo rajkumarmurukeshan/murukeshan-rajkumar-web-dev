@@ -22,10 +22,15 @@
             addToFriendRequest: addToFriendRequest,
             removeFromFriendRequest: removeFromFriendRequest,
             addNote: addNote,
-            deleteNote: deleteNote
+            deleteNote: deleteNote,
+            getUsers: getUsers
         };
 
         return api;
+        
+        function getUsers() {
+            return $http.get('/api/project/admin/users');
+        }
         
         function addNote(userId, note) {
             var body ={

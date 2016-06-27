@@ -11,6 +11,35 @@ module.exports = function (app, models) {
     app.put("/api/project/venue/:venueId/addFavorite", addFavoriteOf);
     app.put("/api/project/venue/:venueId/removeFavorite", removeFavoriteOf);
     app.get("/api/project/venue/:venueId/isFavoriteOf/:userId", isFavoriteOf);
+    app.get("/api/project/admin/venues", getAllVenue);
+    app.delete("/api/project/venue/:venueId", deleteVenue);
+
+    function getAllVenue(req, res) {
+        venueModelProject
+            .getAllVenue()
+            .then(
+                function (venues) {
+                    res.send(venues);
+                },
+                function (error) {
+                    res.send(null);
+                }
+            )
+    }
+
+    function deleteVenue(req,res) {
+        var venueId = req.params.venueId;
+        venueModelProject
+            .deleteVenue(venueId)
+            .then(
+                function (stats) {
+                    res.send(stats);
+                },
+                function (error) {
+                    res.send(error);
+                }
+            );
+    }
 
     function isFavoriteOf(req, res) {
         var venueId =req.params.venueId;

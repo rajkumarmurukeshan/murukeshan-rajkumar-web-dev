@@ -10,6 +10,11 @@
                 controller: "MainController",
                 controllerAs: "model"
             })
+            .when("/admin", {
+                templateUrl: "views/admin/admin-login.view.client.html",
+                controller: "AdminController",
+                controllerAs: "model"
+            })
             .when("/login?:venueId", {
                 templateUrl: "views/user/login.view.client.html",
                 controller: "XploreLoginController",
@@ -59,6 +64,11 @@
                 resolve :{
                     loggedIn: checkLoggedFriend
                 }
+            })
+            .when("/admin/login", {
+                templateUrl: "views/admin/admin.view.client.html",
+                controller: "AdminController",
+                controllerAs: "model"
             })
             .otherwise({
                 redirectTo: "/main"

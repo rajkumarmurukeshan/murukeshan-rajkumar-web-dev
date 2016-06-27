@@ -37,6 +37,20 @@ module.exports = function (app, models) {
     app.put("/api/project/removeFromFriendRequest", removeFromFriendRequest);
     app.put("/api/project/addNote", addNote);
     app.put("/api/project/deleteNote", deleteNote);
+    app.get("/api/project/admin/users" , getAllUsers);
+    
+    function getAllUsers(req, res) {
+        userModelProject
+            .getUsers()
+            .then(
+                function (users) {
+                    res.send(users);
+                },
+                function (error) {
+                    res.send([]);
+                }
+            );
+    }
     
     function addNote(req, res) {
         var userId= req.body.userId;

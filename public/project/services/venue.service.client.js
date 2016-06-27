@@ -12,11 +12,21 @@
             deleteComment: deleteComment,
             addFavoriteOf: addFavoriteOf,
             removeFavoriteOf: removeFavoriteOf,
-            isFavoriteOf: isFavoriteOf
+            isFavoriteOf: isFavoriteOf,
+            getAllVenue: getAllVenue,
+            deleteVenue: deleteVenue
         };
         
         return api;
+        
+        function deleteVenue(venueId) {
+            return $http.delete("/api/project/venue/"+venueId);
+        }
 
+        function getAllVenue() {
+            return $http.get("/api/project/admin/venues");
+        }
+        
         function isFavoriteOf(venueId, userId) {
             return $http.get("/api/project/venue/"+venueId+"/isFavoriteOf/"+userId);
         }

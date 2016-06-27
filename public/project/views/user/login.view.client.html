@@ -8,7 +8,7 @@
         </button>
         <div class="collapse navbar-collapse navHeaderCollapse">
             <ul class="nav navbar-nav navbar-right" >
-                <li><a href="#/register"> <h4>Register</h4></a></li>
+                <li><a href="#/admin"><h4>Admin</h4></a></li>
             </ul>
         </div>
     </div>
@@ -17,6 +17,9 @@
     <div class="thumbnail col-xs-12 col-md-9 col-md-offset-1">
         <div id="loginPageContent">
             <h3>Time to <strong>Xplore!!</strong></h3>
+            <div ng-show= "model.error"
+                 class="errorAlert alert alert-danger"
+                 role="alert"><strong>Error !! </strong>{{model.error}}</div>
             <form id="logForm" name="loginForm" novalidate>
                 <input ng-model="username"
                        required
