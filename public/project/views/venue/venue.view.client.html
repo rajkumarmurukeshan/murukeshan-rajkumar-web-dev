@@ -56,8 +56,6 @@
                 <h4>{{model.addrs}}</h4>
                 <h4>Phone No: {{model.phone}}</h4>
                 <h4>Rating: {{model.rating}}/10</h4>
-                {{model.isFavorite}}
-                {{model.isNotFavorite}}
                 <a style="text-decoration: none" ng-show="model.user && model.isNotFavorite" ng-click="model.addFavorite()"><h4>Add To My Favorite <i class="fa fa-heart-o" aria-hidden="true"></i></h4></a>
                 <a style="text-decoration: none" ng-show="model.user && model.isFavorite" ng-click="model.removeFavorite()"><h4>Remove From My Favorite <i class="fa fa-heart" aria-hidden="true"></i></h4></a>
             </div>
