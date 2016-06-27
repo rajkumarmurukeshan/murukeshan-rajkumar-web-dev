@@ -21,9 +21,9 @@
                                 function (response) {
                                     console.log(response.data);
                                     var venue = response.data;
-                                    console.log(venue.favoriteOf.indexOf(vm.user._id));
                                     if(venue){
-                                        if(venue.favoriteOf.indexOf(vm.user)> -1){
+                                        console.log(venue.favoriteOf.indexOf(vm.user._id));
+                                        if(venue.favoriteOf.indexOf(vm.user._id)> -1){
                                             vm.isFavorite = true;
                                             vm.isNotFavorite = false;
                                         } else {
