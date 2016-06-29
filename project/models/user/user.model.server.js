@@ -24,9 +24,20 @@ module.exports = function () {
         removeFromFriendRequest: removeFromFriendRequest,
         addNote: addNote,
         deleteNote: deleteNote,
-        getUsers: getUsers
+        getUsers: getUsers,
+        uploadImage: uploadImage
     };
     return api;
+    
+    function uploadImage(userId, url) {
+        return ProjectUser
+            .update(
+                {_id: userId},
+                {$set: {
+                    displayPicture: url
+                }}
+            );
+    }
 
     function getUsers() {
         return ProjectUser.find();

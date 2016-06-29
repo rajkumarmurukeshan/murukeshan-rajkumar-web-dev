@@ -57,24 +57,17 @@ module.exports = function (app, models) {
         var size          = myFile.size;
         var mimetype      = myFile.mimetype;
 
+        var url = "/uploads/"+filename;
+
         userModelProject
-            .findUserById(userId)
+            .uploadImage(userId, url)
             .then(
-                function (user) {
-                    delete user._id;
-                    
-                    user.displayPicture = "/uploads/"+filename;
-                    userModelProject
-                        .updateUser(userId,user)
-                        .then(
-                            function (stats) {
-                                res
-                                    .redirect("/project/#/user/edit");
-                            },
-                            function (error) {
-                                res.send(error);
-                            }
-                        );
+                function (stats) {
+                    res
+                        .redirect("/project/#/user/edit");
+                },
+                function (error) {
+                    res.send(error);
                 }
             );
     }
