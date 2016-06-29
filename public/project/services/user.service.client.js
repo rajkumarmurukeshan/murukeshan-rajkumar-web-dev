@@ -23,10 +23,15 @@
             removeFromFriendRequest: removeFromFriendRequest,
             addNote: addNote,
             deleteNote: deleteNote,
-            getUsers: getUsers
+            getUsers: getUsers,
+            deleteImage: deleteImage
         };
 
         return api;
+        
+        function deleteImage(userId) {
+            return $http.put("/api/project/deleteImage/"+userId);
+        }
         
         function getUsers() {
             return $http.get('/api/project/admin/users');

@@ -38,6 +38,22 @@ module.exports = function (app, models) {
     app.put("/api/project/addNote", addNote);
     app.put("/api/project/deleteNote", deleteNote);
     app.get("/api/project/admin/users" , getAllUsers);
+    app.put("/api/project/deleteImage/:userId", deleteImage);
+
+    function deleteImage(req, res) {
+        var userId = req.params.userId;
+        var url = "images/defaultDisplayPic.jpg";
+        userModelProject
+            .uploadImage(userId, url)
+            .then(
+                function (stats) {
+                    res.send(stats);
+                },
+                function (error) {
+                    res.send(error);
+                }
+            );
+    }
 
     var multer = require('multer');
     var upload = multer({ dest: __dirname+'/../../public/uploads' });

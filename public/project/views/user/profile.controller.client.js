@@ -4,7 +4,7 @@
         .controller("XploreProfileController", ProfileController)
 
     function ProfileController($routeParams, $route, $rootScope, XploreUserService, $location) {
-        
+
         var vm = this;
         var id = $rootScope.currentXploreUser._id;
 
@@ -40,7 +40,7 @@
                     for(var i in vm.user.notes){
                         fetchNoteDetails(vm.user.notes[i]);
                     }
-                    
+
                 });
         }
         init();
@@ -60,6 +60,29 @@
                         $route.reload();
                     }
                 )
+        }
+
+        vm.deleteImage =deleteImage;
+
+        function deleteImage() {
+            vm.imgDeleteError= null;
+            console.log(vm.user.displayPicture);
+            if(vm.user.displayPicture == "images/defaultDisplayPic.jpg"){
+                console.log("otha");
+                vm.imgDeleteError = "Cannot delete the default image";
+            } else {
+                XploreUserService
+                    .deleteImage(vm.user._id)
+                    .then(
+                        function (response) {
+                            vm.deleteImagestatus = true;
+                            $route.reload();
+                        },
+                        function (error){
+                            vm.imgDeleteError = "Unable to delete the image";
+                            $route.reload();
+                        })
+            }
         }
 
         function addNote(noteValue) {
@@ -90,7 +113,7 @@
                     }
                 );
         }
-        
+
 
         function fetchUserDetails(usrId) {
             XploreUserService
@@ -119,9 +142,9 @@
                     }
                 );
         }
-        
+
         vm.requestAccept = requestAccept;
-        
+
         function requestAccept(friendId) {
             XploreUserService
                 .removeFromFriendRequest(id, friendId)
@@ -137,7 +160,7 @@
                                     $route.reload();
                                 }
                             )
-                    }, 
+                    },
                     function (error) {
                         $route.reload();
                     }
@@ -231,14 +254,14 @@
         }
 
         vm.findFriend = findFriend;
-        
+
         function findFriend(friendName) {
             XploreUserService
                 .findUserByUsername(friendName)
                 .then(
                     function (response) {
                         vm.friendSearch = response.data;
-                    }, 
+                    },
                     function (error) {
                         vm.friendSearch = null;
                     }
