@@ -62,6 +62,21 @@
                 )
         }
 
+        vm.convertDate = convertDate;
+        
+        function convertDate(date) {
+            var monthNames = [
+                "January", "February", "March",
+                "April", "May", "June", "July",
+                "August", "September", "October",
+                "November", "December"
+            ];
+            var day = date.split('-')[2].split("T")[0];
+            var monthIndex = parseInt(date.split('-')[1]);
+            var year = date.split('-')[0];
+            return (monthNames[monthIndex - 1] + " " + day + ", " + year);
+        }
+
         vm.deleteImage =deleteImage;
 
         function deleteImage() {
