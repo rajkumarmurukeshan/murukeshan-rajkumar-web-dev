@@ -32,7 +32,6 @@
                                         vm.isFavorite = false;
                                         vm.isNotFavorite = true;
                                     }
-                                    console.log("Tha Dai !!");
                                     vm.cmters=[];
                                     if(venue){
                                         for (var i in venue.comments){
@@ -176,13 +175,29 @@
             }
         }
 
+        vm.convertDate = convertDate;
+
+        function convertDate(date) {
+            var monthNames = [
+                "January", "February", "March",
+                "April", "May", "June", "July",
+                "August", "September", "October",
+                "November", "December"
+            ];
+            var day = date.split('-')[2].split("T")[0];
+            var monthIndex = parseInt(date.split('-')[1]);
+            var year = date.split('-')[0];
+            return (monthNames[monthIndex - 1] + " " + day + ", " + year);
+        }
+
         vm.addComment = addComment;
 
         function addComment(commentValue) {
             if($rootScope.currentXploreUser){
                 var comment = {
                     value: commentValue,
-                    commentedBy: $rootScope.currentXploreUser._id
+                    commentedBy: $rootScope.currentXploreUser._id,
+                    commentedOn: Date.now()
                 };
                 XploreVenueService
                     .addComment(vm.venueId,comment)
