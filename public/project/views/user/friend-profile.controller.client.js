@@ -30,28 +30,35 @@
                         var year = date.split('-')[0];
                         vm.newDate = monthNames[monthIndex - 1] + " " + day + ", " + year;
                     }
-                    XploreUserService
-                        .findUserById(currUser._id)
-                        .then(
-                            function (response) {
-                                var refreshedUser = response.data;
-                                if(refreshedUser && (refreshedUser.friends.indexOf(vm.user._id) > -1) && (vm.user.friends.indexOf(currUser._id) > -1)){
-                                    vm.isFriends = true;
+                    if(currUser){
+                        XploreUserService
+                            .findUserById(currUser._id)
+                            .then(
+                                function (response) {
+                                    var refreshedUser = response.data;
+                                    if(refreshedUser && (refreshedUser.friends.indexOf(vm.user._id) > -1) && (vm.user.friends.indexOf(currUser._id) > -1)){
+                                        vm.isFriends = true;
+                                    }
+                                    if(refreshedUser && (refreshedUser.friends.indexOf(vm.user._id) > -1) && (vm.user.friends.indexOf(currUser._id) === -1)){
+                                        vm.requestSent = true;
+                                    }
+                                    if(refreshedUser && (refreshedUser.friends.indexOf(vm.user._id) === -1) && (vm.user.friends.indexOf(currUser._id) === -1)){
+                                        vm.notFriends = true;
+                                    }
+                                    if(refreshedUser &&
+                                        (refreshedUser.friends.indexOf(vm.user._id) === -1) &&
+                                        (vm.user.friends.indexOf(currUser._id) > -1) &&
+                                        (refreshedUser.friendRequest.indexOf(vm.user._id) > -1)){
+                                        vm.accptFrend = true;
+                                    }
                                 }
-                                if(refreshedUser && (refreshedUser.friends.indexOf(vm.user._id) > -1) && (vm.user.friends.indexOf(currUser._id) === -1)){
-                                    vm.requestSent = true;
-                                }
-                                if(refreshedUser && (refreshedUser.friends.indexOf(vm.user._id) === -1) && (vm.user.friends.indexOf(currUser._id) === -1)){
-                                    vm.notFriends = true;
-                                }
-                                if(refreshedUser && 
-                                    (refreshedUser.friends.indexOf(vm.user._id) === -1) && 
-                                    (vm.user.friends.indexOf(currUser._id) > -1) &&
-                                    (refreshedUser.friendRequest.indexOf(vm.user._id) > -1)){
-                                    vm.accptFrend = true;
-                                }
-                            }
-                        );
+                            );
+                    } else {
+                        vm.isFriends = false;
+                        vm.requestSent = false;
+                        vm.notFriends = false;
+                        vm.accptFrend = false;
+                    }
                     vm.fRequests =[];
                     for (var i in vm.user.friendRequest){
                         fetchUserDetails(vm.user.friendRequest[i]);
@@ -154,6 +161,22 @@
                     }
                 );
         }
+
+        vm.convertDate = convertDate;
+
+        function convertDate(date) {
+            var monthNames = [
+                "January", "February", "March",
+                "April", "May", "June", "July",
+                "August", "September", "October",
+                "November", "December"
+            ];
+            var day = date.split('-')[2].split("T")[0];
+            var monthIndex = parseInt(date.split('-')[1]);
+            var year = date.split('-')[0];
+            return (monthNames[monthIndex - 1] + " " + day + ", " + year);
+        }
+
 
         vm.addfriend = addfriend;
 
