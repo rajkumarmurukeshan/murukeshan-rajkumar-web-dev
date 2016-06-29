@@ -20,7 +20,7 @@
                             .then(
                                 function (response) {
                                     var venue = response.data;
-                                    if(venue){
+                                    if(venue && vm.user){
                                         if(venue.favoriteOf.indexOf(vm.user._id)> -1){
                                             vm.isFavorite = true;
                                             vm.isNotFavorite = false;
@@ -32,6 +32,7 @@
                                         vm.isFavorite = false;
                                         vm.isNotFavorite = true;
                                     }
+                                    console.log("Tha Dai !!");
                                     vm.cmters=[];
                                     if(venue){
                                         for (var i in venue.comments){
