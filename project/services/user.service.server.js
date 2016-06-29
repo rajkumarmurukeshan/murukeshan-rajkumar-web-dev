@@ -38,6 +38,45 @@ module.exports = function (app, models) {
     app.put("/api/project/addNote", addNote);
     app.put("/api/project/deleteNote", deleteNote);
     app.get("/api/project/admin/users" , getAllUsers);
+
+    var multer = require('multer');
+    var upload = multer({ dest: __dirname+'/../../public/uploads' });
+
+    app.post("/api/project/uploads", upload.single('myImgFile'), uploadImage);
+
+    function uploadImage(req, res) {
+
+        var userId = req.body.userId;
+
+        var myFile        = req.file;
+
+        var originalname  = myFile.originalname; // file name on user's computer
+        var filename      = myFile.filename;     // new file name in upload folder
+        var path          = myFile.path;         // full path of uploaded file
+        var destination   = myFile.destination;  // folder where file is saved to
+        var size          = myFile.size;
+        var mimetype      = myFile.mimetype;
+
+        userModelProject
+            .findUserById(userId)
+            .then(
+                function (user) {
+                    user.displayPicture = "/uploads/"+filename;
+                    userModelProject
+                        .updateUser(userId,user)
+                        .then(
+                            function (stats) {
+                                res
+                                    .redirect("/project/#/user/edit");
+                            },
+                            function (error) {
+                                res.send(error);
+                            }
+                        );
+                }
+            );
+    }
+
     
     function getAllUsers(req, res) {
         userModelProject

@@ -31,6 +31,12 @@
     <div class="row">
         <div class="col-xs-12 col-sm-3 col-md-3">
             <img id="searchImage" ng-src="{{model.user.displayPicture}}"  class="img-rounded">
+            <form action="/api/project/uploads"  method="post" enctype="multipart/form-data">
+                <label>Upload</label>
+                <input  name="myImgFile"   type="file" class="form-control"/>
+                <input  name="userId" value="{{model.user._id}}" style="display: none"/>
+                <button type="submit"   class="btn btn-block btn-primary">Upload Image</button>
+            </form>
         </div>
         <div class="col-xs-12 col-sm-8 col-sm-offset-1 col-md-8 col-md-offset-1">
             <form>
@@ -92,7 +98,7 @@
                            placeholder="*Date Of Birth"
                            id="datepicker"
                            default="model.user.dob"
-                           required type="date"/>
+                           required type="text"/>
                 </div>
                 <button type="submit"
                         ng-click="model.updateUser()"
