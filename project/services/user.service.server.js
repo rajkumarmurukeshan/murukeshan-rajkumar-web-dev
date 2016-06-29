@@ -62,6 +62,7 @@ module.exports = function (app, models) {
             .then(
                 function (user) {
                     delete user._id;
+                    
                     user.displayPicture = "/uploads/"+filename;
                     userModelProject
                         .updateUser(userId,user)
