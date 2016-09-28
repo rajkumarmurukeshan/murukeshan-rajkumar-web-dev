@@ -1,8 +1,5 @@
 #body {
-    padding-top: 100px;
-    width: inherit;
-    position: relative;
-    display: flex;
+    padding-top: 75px;
 }
 
 #home-bg {
@@ -21,12 +18,18 @@
 
 }
 
+.img-rounded {
+    padding: 10px;
+    height: 270px;
+    width: 100%;
+}
+
 .navbar-brand {
     padding-top: 5px;
 }
 
-.navbar-brand h3 {
-    margin-top: 10px;
+.navbar-brand h1 {
+    margin-top: 9px;
 }
 
 .navbar-brand h4 {
@@ -35,4 +38,168 @@
 
 #abt-me-header{
     margin-top: 0px;
+}
+
+#myDetails {
+    font-size: large;
+}
+
+hr{
+    margin-top: 0px;
+    margin-bottom: 5px;
+    border-width: 2px;
+    border-color: black;
+}
+
+#summary{
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+#education{
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+#work{
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+#projects{
+    padding-left: 20px;
+    margin-right: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    #einstein{
+        margin-left: 80px;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #einstein{
+        margin-left: 30px;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #mandela{
+        margin-left: 80px;
+        margin-bottom: 15px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #mandela{
+        margin-left: 30px;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #franklin{
+        margin-left: 50px;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #franklin{
+        margin-left: 11px;
+        margin-bottom: 10px;
+    }
+}
+
+.degree{
+    margin-bottom: 27px;
+    margin-top: 20px;
+}
+
+h5{
+    margin-top: -5px;
+    font-size: 15px;
+}
+
+#liq{
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+#wcm{
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+#xplore{
+    margin-top: 20px;
+    margin-left: 0px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    padding-top: 35px;
+    padding-left: 0px;
+    padding-bottom: 8px;
+}
+
+#ir{
+    margin-top: 20px;
+    margin-left: 0px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    padding-top: 15px;
+    padding-left: 0px;
+    padding-bottom: 13px;
+}
+
+#pr{
+    margin-top: 20px;
+    margin-left: 0px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    padding-top: 15px;
+    padding-left: 0px;
+    padding-bottom: 13px;
+}
+
+#webSpider{
+    margin-top: 20px;
+    margin-left: 0px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    padding-top: 15px;
+    padding-left: 0px;
+    padding-bottom: 13px;
+}
+
+@media screen and (min-width: 768px) {
+    #xploreImg{
+        margin-top: -25px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #xploreImg{
+        margin-top: 10px;
+        margin-left: -15px;
+    }
+}
+
+#gtlink{
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
+#gtlink .fa{
+    font-size: 16px;
+    margin-right: 20px;
+}
+
+.gtlinkIr{
+    margin-left: 0px;
+    font-size: 16px;
+    margin-top: 5px;
 }
